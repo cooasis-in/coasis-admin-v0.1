@@ -1,0 +1,1 @@
+console.log("Cooasis_admin");
