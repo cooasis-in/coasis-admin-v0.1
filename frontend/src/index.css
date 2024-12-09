@@ -122,11 +122,11 @@
 }
 
 .glow-effect-container {
-  background: radial-gradient(circle, #e1ff26 -90%, transparent 55%);
+  background: radial-gradient(circle, #FCFCD8 -90%, transparent 55%);
 }
 
 .glow-effect-icon {
-  text-shadow: 0 0 0.5rem #e1ff26, 0 0 1rem #e1ff26, 0 0 1.5rem #e1ff26,
-    0 0 2.5rem #e1ff26, 0 0 4rem #e1ff26, 0 0 5.5rem #e1ff26, 0 0 6rem #e1ff26,
-    0 0 9.5rem #e1ff26;
+  text-shadow: 0 0 0.5rem #FCFCD8, 0 0 1rem #FCFCD8, 0 0 1.5rem #FCFCD8,
+    0 0 2.5rem #FCFCD8, 0 0 4rem #FCFCD8, 0 0 5.5rem #FCFCD8, 0 0 6rem #FCFCD8,
+    0 0 9.5rem #FCFCD8;
 }

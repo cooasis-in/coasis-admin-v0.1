@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       dropShadow: {
-        glow: "0 0 8px #e1ff26, 0 0 15px #e1ff26",
+        glowLeft: "0px 0px 8px #FCFCD8, -5px 0px 15px #FCFCD8",
       },
       colors: {
-        glow: "#e1ff26",
+        glow: "#FCFCD8",
       },
       backdropBlur: {
         custom: "9.1px",

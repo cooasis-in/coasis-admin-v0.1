@@ -1,42 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bellLogo from "../../assets/images/bell.svg";
-import { FiHome, FiActivity, FiSidebar } from "react-icons/fi";
-import { PiChats } from "react-icons/pi";
-import { BsWallet2 } from "react-icons/bs";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FiSidebar } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsSidebarOpen, sidebarSelector } from "../../features/sidebarSlice";
 import { Sidebar, sidebarClasses } from "react-pro-sidebar";
-import { IoColorPaletteOutline } from "react-icons/io5";
 import { FaAngleRight } from "react-icons/fa6";
 import navbarLogo from "../../assets/images/navbar-logo.svg";
-import navbarLogoText from "../../assets/images/navbar-logo-text.svg";
-import {
-  IoSettingsOutline,
-  IoCalendarClearOutline,
-  IoChevronDown,
-} from "react-icons/io5";
-import cohyveLogoViolet from "../../assets/images/cohyve-logo-violet.svg";
-import { RiUserSettingsLine } from "react-icons/ri";
-import { MdOutlineLogout } from "react-icons/md";
-import { APP_URL } from "../../config";
-// import { LuUsers } from "react-icons/lu";
-import { FiUsers } from "react-icons/fi";
+import bigBellIcon from "../../assets/images/bell-big.svg";
+import { IoEnterOutline } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
+import profileImg from "../../assets/images/Elmer-pic.png";
+import { MENU_ITEMS } from "../../config";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { GiSettingsKnobs } from "react-icons/gi";
+import { BiHelpCircle } from "react-icons/bi";
 
 function DashboardLayout({ children }) {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [isSidebarLocked, setIsSidebarLocked] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(null);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+  const handleMenuClick = (index) => {
+    setOpenSubMenu(openSubMenu === index ? null : index);
   };
 
   const { isSidebarOpen } = useSelector(sidebarSelector);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  // console.log(isSidebarOpen, isSidebarLocked);
 
   const { pathname } = useLocation();
 
@@ -45,11 +35,6 @@ function DashboardLayout({ children }) {
   };
 
   const handleSidebarLock = () => {
-    // if (isSidebarOpen) {
-    //   dispatch(setIsSidebarOpen(false));
-    // } else {
-    //   dispatch(setIsSidebarOpen(true));
-    // }
     setIsSidebarLocked((prev) => !prev);
   };
 
@@ -63,68 +48,15 @@ function DashboardLayout({ children }) {
     dispatch(setIsSidebarOpen(false));
   };
 
-  const MENU_ITEMS = [
-    {
-      name: "home",
-      url: APP_URL.HOME,
-      icon: FiHome,
-    },
-    {
-      name: "messages",
-      url: APP_URL.MESSAGES,
-      icon: PiChats,
-    },
-    {
-      name: "community",
-      url: APP_URL.COMMUNITY,
-      icon: FiUsers,
-    },
-    {
-      name: "analytics",
-      url: APP_URL.ANALYTICS,
-      icon: FiActivity,
-    },
-    {
-      name: "designs",
-      url: APP_URL.DESIGNS,
-      icon: IoColorPaletteOutline,
-    },
-    {
-      name: "credits",
-      url: APP_URL.CREDITS,
-      icon: BsWallet2,
-    },
-    {
-      name: "meetings",
-      url: APP_URL.MEETINGS,
-      icon: IoCalendarClearOutline,
-    },
-  ];
-
-  const handleGoToWallet = (e) => {
-    e.preventDefault();
-    navigate(APP_URL.WALLET);
-  };
-
-  const handleNavigateToProfile = (e) => {
-    e.preventDefault();
-    navigate(APP_URL.SETTINGS);
-  };
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    navigate(APP_URL.SIGNIN);
-  };
-
   return (
     <>
       <div className="w-screen h-screen overflow-hidden bg-[#050505] text-[#FCFCD8] flex">
         {/**------SIDEBAR--------- */}
         <Sidebar
           collapsed={!isSidebarOpen}
-          className="my-sidebar z-0 "
-          // className={`${isSidebarOpen ? "w-[10%]" : "w-[5%]"} h-full `}
+          className="my-sidebar z-0"
           onMouseEnter={handleMouseEnter}
+          ss
           onMouseLeave={handleMouseLeave}
           rootStyles={{
             [`.${sidebarClasses.container}`]: {
@@ -166,14 +98,17 @@ function DashboardLayout({ children }) {
           <div
             className={`w-full h-[13%] flex justify-center items-center gap-x-2 `}
           >
-            <img width={29.51} src={navbarLogo} alt="logo" />
-            {isSidebarOpen && (
+            {isSidebarOpen ? (
               <>
-                <img width={72.48} src={navbarLogoText} alt="logo-text" />
-                <p className="text-[10px] border-[#222221] border rounded-full p-2 py-1 bg-gradient-to-r from-[#a15fff]   to-[#ff8e8e]  bg-clip-text text-transparent">
-                  Alpha
-                </p>
+                <div className="flex">
+                  <img width={30} src={navbarLogo} alt="logo" />
+                  <span className="font-thin text-sm ml-2 text-nowrap">
+                    Cohyve <br /> Admin Panel
+                  </span>
+                </div>
               </>
+            ) : (
+              <img width={29.51} src={navbarLogo} alt="logo" />
             )}
           </div>
           <div
@@ -188,91 +123,136 @@ function DashboardLayout({ children }) {
             >
               {MENU_ITEMS.map((ele, index) => {
                 return (
-                  <Link key={index} to={ele?.url}>
-                    {isSidebarOpen ? (
-                      <div
-                        className={`${
-                          (pathname?.includes(ele?.name) ||
-                            pathname === ele.url) &&
-                          "bg-[#141414] "
-                        } flex items-center  rounded-xl hover:bg-[#141414] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out w-40`}
-                      >
+                  <div key={index} onClick={() => handleMenuClick(index)}>
+                    <Link to={ele?.url}>
+                      {isSidebarOpen ? (
                         <div
-                          key={index}
-                          className={`p-[0.8rem] ${
+                          className={`${
                             (pathname?.includes(ele?.name) ||
                               pathname === ele.url) &&
-                            "glow-effect-container"
-                          } `}
+                            "bg-[#141414] "
+                          } flex items-center rounded-xl hover:bg-[#141414] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out w-40`}
                         >
-                          <ele.icon
-                            size={20}
-                            className={`transition-all duration-500 ease-in-out ${
-                              pathname?.includes(ele?.name) ||
-                              pathname === ele.url
-                                ? "text-glow glow-effect-icon scale-110"
-                                : "text-[#424e50]"
+                          <div
+                            key={index}
+                            className={`p-[0.8rem] ${
+                              (pathname?.includes(ele?.name) ||
+                                pathname === ele.url) &&
+                              "glow-effect-container"
+                            } `}
+                          >
+                            <ele.icon
+                              size={20}
+                              className={`transition-all duration-500 ease-in-out ${
+                                pathname?.includes(ele?.name) ||
+                                pathname === ele.url
+                                  ? "text-glow glow-effect-icon scale-110"
+                                  : "text-[#424e50]"
+                              }`}
+                            />
+                          </div>
+                          <p
+                            className={`first-letter:uppercase ${
+                              (!pathname?.includes(ele?.name) ||
+                                !pathname === ele.url) &&
+                              "opacity-55"
                             }`}
-                          />
+                          >
+                            {ele.name}
+                          </p>
+                          {ele.subMenu && ele.subMenu.length > 0 && (
+                            <div
+                              className={`transition-all duration-500 ease-in-out ml-5 ${
+                                pathname?.includes(ele?.name) ||
+                                pathname === ele.url
+                                  ? "text-glow glow-effect-icon scale-110"
+                                  : "text-[#424e50]"
+                              }`}
+                            >
+                              {openSubMenu === index ? (
+                                <MdKeyboardArrowUp />
+                              ) : (
+                                <MdKeyboardArrowDown />
+                              )}
+                            </div>
+                          )}
                         </div>
-                        <p
-                          className={`first-letter:uppercase ${
-                            (!pathname?.includes(ele?.name) ||
-                              !pathname === ele.url) &&
-                            "opacity-55"
+                      ) : (
+                        <div
+                          className={`${
+                            (pathname?.includes(ele?.name) ||
+                              pathname === ele.url) &&
+                            " rounded-xl bg-[#141414]"
                           }`}
                         >
-                          {ele.name}
-                        </p>
-                        {index === 4 && (
-                          <p className="text-[10px] ml-2 border-[#222221] border rounded-full p-2 py-1 bg-gradient-to-r from-[#a15fff]   to-[#ff8e8e]  bg-clip-text text-transparent">
-                            Alpha
-                          </p>
-                        )}
-                      </div>
-                    ) : (
-                      <div
-                        className={` ${
-                          (pathname?.includes(ele?.name) ||
-                            pathname === ele.url) &&
-                          " rounded-xl bg-[#141414]"
-                        }`}
-                      >
-                        <div
-                          key={index}
-                          className={`p-[0.8rem] ${
-                            pathname?.includes(ele?.name) ||
-                            pathname === ele.url
-                              ? "glow-effect-container bg-[#141414]"
-                              : ""
-                          }   cursor-pointer transition-all duration-500 ease-in-out`}
-                        >
-                          <ele.icon
-                            size={20}
-                            className={`transition-all duration-500 ease-in-out ${
+                          <div
+                            key={index}
+                            className={`p-[0.8rem] ${
                               pathname?.includes(ele?.name) ||
                               pathname === ele.url
-                                ? "text-glow glow-effect-icon scale-110"
-                                : "text-[#424e50]"
-                            }`}
-                          />
+                                ? "glow-effect-container bg-[#141414]"
+                                : ""
+                            } cursor-pointer transition-all duration-500 ease-in-out`}
+                          >
+                            <ele.icon
+                              size={20}
+                              className={`transition-all duration-500 ease-in-out ${
+                                pathname?.includes(ele?.name) ||
+                                pathname === ele.url
+                                  ? "text-[#FCFCD8] glow-effect-icon scale-110"
+                                  : "text-[#424e50]"
+                              }`}
+                            />
+                          </div>
                         </div>
+                      )}
+                    </Link>
+
+                    {/* Show submenu when menu item has submenu */}
+                    {ele.subMenu && ele.subMenu.length > 0 && (
+                      <div
+                        className={`ml-4 mt-2 flex flex-col ${
+                          openSubMenu === index ? "block" : "hidden"
+                        }`}
+                      >
+                        {ele.subMenu.map((sub, subIndex) => (
+                          <Link key={subIndex} to={sub.url}>
+                            <div
+                              className={`${
+                                pathname?.includes(sub.name) ||
+                                pathname === sub.url
+                                  ? "bg-[#141414] "
+                                  : "opacity-55"
+                              } flex items-center rounded-xl cursor-pointer p-[0.8rem] transition-all duration-500 ease-in-out w-40`}
+                            >
+                              <p className="ml-2">{sub.name}</p>
+                            </div>
+                          </Link>
+                        ))}
                       </div>
                     )}
-                  </Link>
+                  </div>
                 );
               })}
             </div>
 
             <div
-              className={`flex items-center mb-[1.5rem] ${
-                isSidebarOpen && "pl-4 gap-x-2"
+              className={`flex items-center flex-col mb-[1.5rem] ${
+                isSidebarOpen && "pl-4 gap-x-2 flex-col"
               }`}
             >
-              <div className="p-[0.8rem] border border-[#222221] bg-[#141414] rounded-xl cursor-pointer">
-                <IoSettingsOutline size={20} className="text-[#424e50]" />
+              <div className="flex text-center items-center justify-between">
+                <div className="p-[0.8rem] rounded-xl cursor-pointer">
+                  <BiHelpCircle size={20} className="text-[#424e50]" />
+                </div>
+                {isSidebarOpen && <p className="opacity-55">Help</p>}
               </div>
-              {isSidebarOpen && <p className="opacity-55">Setting</p>}
+              <div className="flex items-center justify-between">
+                <div className="p-[0.8rem] rounded-xl cursor-pointer ">
+                  <GiSettingsKnobs size={20} className="text-[#424e50]" />
+                </div>
+                {isSidebarOpen && <p className="opacity-55">Setting</p>}
+              </div>
             </div>
           </div>
         </Sidebar>
@@ -284,43 +264,54 @@ function DashboardLayout({ children }) {
             className={`w-full pr-[2rem] ${
               isSidebarOpen ? "pl-[3.5rem]" : " pl-2"
             } h-[13%] flex justify-between items-center z-20`}
-            // className={`w-full pr-[2rem] pl-2 h-[13%] flex justify-between items-center`}
           >
-            {/* <div className="flex items-center gap-x-4">
-              <div
-                className="w-11 h-11 relative rounded-full flex justify-center items-center opacity-55 bg-[#151515] cursor-pointer"
-                onClick={handleSidebarLock}
-              >
-                <FiSidebar size={20} />
-                <FaAngleRight size={8} className="absolute right-4" />
-              </div> */}
-            <div>
-              <h1 className="f-HelveticaNeueRoman text-[17px] text-[#FCFCD8] leading-[1rem] tracking-tight">
-                Dashboard
-              </h1>
-              <p className="f-HelveticaNeueLight text-[14px] opacity-55">
-                Here's an overview of your Cooasis activity
-              </p>
+            <div
+              className="flex cursor-pointer items-center gap-x-3  relative p-[1px] rounded-2xl"
+              style={{
+                background:
+                  "linear-gradient(98.06deg, rgba(255, 255, 255, 0.2) -11.85%, rgba(165, 165, 165, 0.062) 105.09%)",
+              }}
+            >
+              <div className="flex items-center gap-x-2 px-4 py-[8px] bg-[#050505] rounded-2xl w-full h-full">
+                <CiSearch />
+                <input
+                  type="text"
+                  placeholder="Search tasks"
+                  className="border-none bg-transparent ml-2"
+                />
+              </div>
             </div>
-            {/* </div> */}
 
             {/* right */}
             <div className="flex gap-x-4">
               <div
-                className="flex cursor-pointer items-center gap-x-3  relative p-[1px] rounded-full"
+                className="flex cursor-pointer items-center gap-x-3  relative p-[1px] rounded-2xl"
                 style={{
                   background:
                     "linear-gradient(98.06deg, rgba(255, 255, 255, 0.2) -11.85%, rgba(165, 165, 165, 0.062) 105.09%)",
                 }}
-                onClick={handleGoToWallet}
               >
-                <div className="flex items-center gap-x-2 px-4 py-[11px] bg-[#050505] rounded-full w-full h-full">
-                  <img width={22} src={cohyveLogoViolet} alt="logo" />
-                  <span className="text-sm">Wallet</span>
+                <div className="flex items-center gap-x-2 px-4 py-[8px] bg-[#050505] rounded-2xl w-full h-full">
+                  <img width={28} src={profileImg} alt="logo" />
+                  <span className="text-sm">Welcome Rupesh</span>
+                  <span className="bg-[#1f1f1f] p-1 rounded-md">Manager</span>
+                </div>
+              </div>
+              <div
+                className="flex cursor-pointer items-center gap-x-3  relative p-[1px] rounded-2xl"
+                style={{
+                  background:
+                    "linear-gradient(98.06deg, rgba(255, 255, 255, 0.2) -11.85%, rgba(165, 165, 165, 0.062) 105.09%)",
+                }}
+              >
+                <div className="flex items-center gap-x-2 px-4 py-[8px] bg-[#050505] rounded-2xl w-full h-full">
+                  <IoEnterOutline />
+                  <span className="text-sm">Check in</span>
                 </div>
               </div>
 
               {/* bell */}
+              {/*  */}
               <div
                 className="relative w-[40px] h-[40px] p-2 rounded-full bg-[#2D303133]/80 cursor-pointer"
                 onClick={toggleNotificationBox}
@@ -332,50 +323,54 @@ function DashboardLayout({ children }) {
 
                 {/* Notification Box */}
                 {isNotificationVisible && (
-                  <div className="absolute top-[3rem] right-0 w-[200px] bg-[#FCFCD8] shadow-lg p-[1rem] rounded-lg">
-                    <p className="text-[14px] text-[#000]">
-                      You have 2 new notifications
-                    </p>
-                    <ul className="text-[12px] text-[#333]">
-                      <li className="py-[0.3rem]">Notification 1</li>
-                      <li className="py-[0.3rem]">Notification 2</li>
-                    </ul>
+                  <div
+                    style={{
+                      backdropFilter: "blur(30px)",
+                      background: "#1F1F1FA8",
+                    }}
+                    className={`absolute flex flex-col overflow-hidden w-[427px] h-[500px] cursor-default rounded-[25px] px-[19px] py-6 top-16 z-10 -right-[1.5rem]
+                                      transition-all duration-300 ease-linear transform ${
+                                        isNotificationVisible
+                                          ? "opacity-100 translate-y-0"
+                                          : "opacity-0 -translate-y-4 pointer-events-none"
+                                      }`}
+                  >
+                    <header className="h-fit w-full">
+                      <h5 className="text-xl">Notifications</h5>
+                      <div className="w-full flex justify-between items-center text-sm  rounded-[10px] bg-[#1F1F1F] h-[42px] px-3 my-3">
+                        <div className="flex items-center gap-x-[23px]">
+                          <div className="flex items-center gap-x-[7px]">
+                            <span>All</span>
+                            <p className="bg-[#262626] px-[7px] py-[2px] rounded-3xl">
+                              {"0"}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-x-[7px] ">
+                            <span className="opacity-50">Unread</span>
+                            <p className="bg-[#262626] opacity-50 px-[7px] py-[2px] rounded-3xl">
+                              {"0"}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="opacity-10 cursor-not-allowed">
+                          Mark all as read
+                        </p>
+                      </div>
+                    </header>
+                    <div className="flex-1 flex justify-center items-center overflow-y-auto custom-scrollbar scrollbar-sm">
+                      <div className="flex flex-col items-center">
+                        {/* <LuBell size={48} /> */}
+                        <img width={93} src={bigBellIcon} alt="bell-icon" />
+                        <p className="text-xl opacity-50 text-center">
+                          This is where your notification <br /> will appear
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
 
               {/* user icon */}
-              <div
-                className="flex gap-x-3 relative items-center cursor-pointer"
-                onClick={toggleMenu}
-                // onBlur={() => setIsMenuOpen(false)}
-              >
-                <div className="bg-[#151515] rounded-full border-[1px] border-[#FFFFFF14] h-[43px] w-[43px] flex justify-center items-center">
-                  <span>C</span>
-                </div>
-                <IoChevronDown
-                  className={`text-[#e1ff26] ${
-                    isMenuOpen && "rotate-180"
-                  } transition-all duration-300 ease-linear`}
-                />
-                {isMenuOpen && (
-                  <div className="absolute w-fit h-fit -bottom-[76px] z-10 right-0 rounded-xl transition-all duration-300 ease-in-out">
-                    <button
-                      onClick={handleNavigateToProfile}
-                      className="flex gap-x-2 w-full items-center border-b border-[#151515] px-4 py-2 bg-[#171717] transition-all duration-300 ease-linear text-[15px]  opacity-55 hover:opacity-100"
-                    >
-                      <RiUserSettingsLine size={18} /> Profile
-                    </button>
-                    <button
-                      onClick={handleLogout}
-                      className="flex gap-x-2 w-full border-t border-[#FCFCD8a8] items-center px-4 py-2 bg-[#171717] transition-all duration-300 ease-linear text-[15px]  text-red-400 hover:text-red-600"
-                    >
-                      <MdOutlineLogout size={18} />
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
             </div>
           </nav>
           <div className="w-full h-[87%] bg-[#0d0e0e] text-[#fcfcd8] overflow-hidden rounded-tl-[33px] border border-[#171818]">
