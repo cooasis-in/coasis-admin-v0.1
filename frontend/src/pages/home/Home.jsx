@@ -5,10 +5,10 @@ import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { ProjectList } from "../../config";
 import RecentActivityCard from "../../components/cards/RecentActivityCard";
 import HighPriorityCard from "../../components/cards/HighPriorityCard";
-import PriorityTableCard from "../../components/cards/PriorityTableCard";
+import PriorityTableCard from "../../components/Table/PriorityTable";
 
 const projectStatus = ["1 Week", "30 Days", "3 Months"];
-const projectsData = [
+const OverallProjects = [
   { count: "45", status: "Upcoming", pendency: "2" },
   { count: "10", status: "Ongoing", pendency: "1" },
   { count: "03", status: "Overdue", pendency: "2" },
@@ -17,12 +17,16 @@ const projectsData = [
 
 const Home = () => {
   const itemsPerPage = 5;
-  // const [toggleArrow, setToggleArrow] = useState(true);
   const [filteredProjects, setFilteredProjects] = useState(ProjectList);
+
   const handleFilter = (e) => {
     e.preventDefault();
+    const selectedPriority = e.target.value;
     setFilteredProjects(
-      ProjectList?.filter((ele) => ele?.priorityLabel === e?.target?.value)
+      ProjectList?.filter(
+        (ele) =>
+          ele?.priorityLabel === selectedPriority || selectedPriority === "All"
+      )
     );
   };
 
@@ -37,6 +41,8 @@ const Home = () => {
               onChange={handleFilter}
               className="bg-[#121212] py-2 px- pl-3 pr-8 rounded-xl appearance-none w-full cursor-pointer"
             >
+              <option value="All">All</option>{" "}
+              {/* Add All option for no filter */}
               {projectStatus.map((ele) => (
                 <option key={ele} value={ele}>
                   {ele}
@@ -49,7 +55,7 @@ const Home = () => {
           </div>
         </div>
         <div className="h-fit bg-inherit  flex justify-between">
-          {projectsData.map((ele) => (
+          {OverallProjects.map((ele) => (
             <div className="basis-[22%] px-4 py-3 mx-3 bg-[#121212] rounded-[24px] flex flex-col ">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -85,6 +91,7 @@ const Home = () => {
               onChange={handleFilter}
               className="bg-[#121212] py-2 px-3 pr-8 rounded-xl appearance-none w-full cursor-pointer"
             >
+              <option value="All">All</option>
               {projectStatus.map((ele) => (
                 <option key={ele} value={ele}>
                   {ele}
@@ -100,6 +107,7 @@ const Home = () => {
           <PriorityTableCard
             currentPage={1}
             itemsPerPage={itemsPerPage}
+            filteredProjects={filteredProjects}
           />
         </div>
       </div>
