@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import { APP_URL } from "./config";
 import Escalate from "./pages/escalate/Escalate";
-// import Index from "./pages/index/Index";
 import Meetings from "./pages/messages/Messages";
 import Settings from "./pages/settings/Settings";
-import YourTeam from "./pages/yourTeam/YourTeam";
 import OpenProjects from "./pages/Projects/OpenProjects";
+import ClosedProjects from "./pages/Projects/ClosedProjects";
+import Creators from "./pages/yourTeam/Creators";
+import Brands from "./pages/yourTeam/Brands";
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
       <Routes>
         <Route path={APP_URL.HOME} element={<Home />} />
         <Route path={APP_URL.PROJECTS} element={<OpenProjects />} />
-        <Route path={APP_URL.YOUR_TEAM} element={<YourTeam />} />
+        <Route path={APP_URL.OPENPROJECTS} element={<OpenProjects />} />
+        <Route path={APP_URL.CLOSEDPROJECTS} element={<ClosedProjects />} />
+        <Route path={APP_URL.CREATORS} element={<Creators />} />
+        <Route path={APP_URL.BRANDS} element={<Brands />} />
         <Route path={APP_URL.ESCALATE} element={<Escalate />} />
-        {/* <Route path={APP_URL.INDEX} element={<Index />} /> */}
         <Route path={APP_URL.MEETINGS} element={<Meetings />} />
         <Route path={APP_URL.SETTINGS} element={<Settings />} />
       </Routes>

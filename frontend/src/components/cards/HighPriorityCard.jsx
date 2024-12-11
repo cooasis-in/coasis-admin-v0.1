@@ -1,17 +1,14 @@
-import { useState } from "react";
 import { MdPersonAddAlt } from "react-icons/md";
-import { PiChats } from "react-icons/pi";
+import { PiChats, PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { GiElectric } from "react-icons/gi";
 import { ProjectList } from "../../config";
-import SelectPriorityTable from "../Table/SelectPriorityTable";
 
 const HighPriorityCard = () => {
-  const [filteredProjects, setFilteredProjects] = useState(ProjectList);
-
+  const filteredProjects = ProjectList.filter(project => project.priorityLabel === "High");
 
   return (
     <div className="bg-[#121212] flex flex-col justify-evenly m-4 p-4 rounded-2xl">
-      <h3 className="text-lg text-white mb-4">High priority Tasks</h3>
+      <h3 className="text-lg text-white mb-4">High Priority Tasks</h3>
       {filteredProjects.slice(0, 3).map((project, index) => (
         <div
           key={index}
@@ -29,7 +26,20 @@ const HighPriorityCard = () => {
             <span className="font-thin text-[#454545]">{project.label3}</span>
             <span className="font-thin">{project.deadline}</span>
           </div>
-          <SelectPriorityTable priority={project.priorityLabel} />
+          <div className="flex bg-[#191919] items-center rounded-xl appearance-none relative mr-7">
+            <div
+              className={`bg-[#191919] py-3 px-3 pr-6 mr-8 rounded-xl appearance-none w-full cursor-pointer ${
+                project.priorityLabel === "High" && "text-[#ac5858]"
+              }
+                    ${project.priorityLabel === "Low" && "text-[#4E8B6E]"}
+                    ${project.priorityLabel === "Medium" && "text-[#9B8E4D]"}`}
+            >
+              {project.priorityLabel}
+            </div>
+            <span className="pointer-events-none absolute right-1">
+              <PiDotsThreeOutlineVerticalFill size={20} />
+            </span>
+          </div>
           <div className="flex items-center gap-[10px]">
             <MdPersonAddAlt
               size={25}

@@ -4,13 +4,14 @@ import PriorityTableCard from "../../components/Table/PriorityTable";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { ProjectList } from "../../config";
 
-const OpenProjects = () => {
+const ClosedProjects = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Filter for pending projects
-  const openProjects = ProjectList.filter(project => project.projectStatus === "Pending");
-
+  // Filter for completed and cancelled projects
+  const closedProjects = ProjectList.filter(
+    project => project.projectStatus === "Completed" || project.projectStatus === "Cancelled"
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -18,11 +19,11 @@ const OpenProjects = () => {
     <DashboardLayout>
       <div className="w-full h-[100%] p-4 gap-4 overflow-y-auto custom-scrollbar scrollbar-md">
         <div className="flex justify-between items-center m-4">
-          <h1 className="text-normal font-normal">Ongoing</h1>
+          <h1 className="text-normal font-normal">Closed Projects</h1>
           <Pagination
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}
-            totalItems={openProjects.length}
+            totalItems={closedProjects.length}
             paginate={paginate}
           />
         </div>
@@ -30,7 +31,7 @@ const OpenProjects = () => {
           <PriorityTableCard
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}
-            filteredProjects={openProjects}
+            filteredProjects={closedProjects}
           />
         </div>
       </div>
@@ -38,4 +39,4 @@ const OpenProjects = () => {
   );
 };
 
-export default OpenProjects;
+export default ClosedProjects;
