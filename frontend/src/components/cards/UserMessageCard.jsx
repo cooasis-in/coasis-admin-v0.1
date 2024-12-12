@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { sidebarSelector } from "../../features/sidebarSlice";
-import Chip from "../chip/Chip";
+import Chip from "../clip/clip";
 
 const UserMessageCard = ({
   name,
@@ -41,7 +41,7 @@ const UserMessageCard = ({
             : lastMessage}
         </p>
         <div className="mt-2.5">
-          <Chip text={"Request"} bgCol={"#e1ff26"} textCol={"#014f59"} />
+          <Chip text={"Request"} bgCol={"#FCFCD817"} textCol={"#38A169"} />
         </div>
       </div>
     </div>
