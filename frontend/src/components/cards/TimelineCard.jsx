@@ -26,7 +26,7 @@ const TimelineCard = () => {
         />
 
         <div className="flex justify-between  basis-[90%]">
-          {[0, 1, 2, 3].map((ele) => (
+          {[0, 1, 2].map((ele) => (
             <p key={ele} className="w-[22.5%] text-center">
               {startDate.clone().add(ele, "days").format("MMMM DD")}
             </p>
@@ -39,7 +39,7 @@ const TimelineCard = () => {
           onClick={handleNext}
         />
       </header>
-      <div className="w-full flex-1 mt-2 pr-2 overflow-y-auto custom-scrollbar scrollbar-sm">
+      <div className="w-full flex-1 mt-2 pr-2 ">
         {Array(24)
           .fill(0)
           .map((ele, ind) => (

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { FaLinkedinIn, FaBehance, FaInstagram } from "react-icons/fa";
 import { MdOutlinePersonAddAlt, MdOutlineWatchLater } from "react-icons/md";
-import { PiEnvelope } from "react-icons/pi";
-import { MdOutlinePhone } from "react-icons/md";
-import { IoLocationOutline, IoEarthOutline } from "react-icons/io5";
-import { RiLetterSpacing2 } from "react-icons/ri";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BsLink } from "react-icons/bs";
 import { LiaCommentDotsSolid } from "react-icons/lia";
 import { IoFolderOutline } from "react-icons/io5";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { LuTvMinimalPlay } from "react-icons/lu";
+import { TiMessages } from "react-icons/ti";
+import { ImBlocked } from "react-icons/im";
 import CreatorImg from "../../assets/images/Mask group.svg";
 import CreatorRating from "../../assets/images/rating-stars.svg";
 import VisualDesign from "../../assets/images/visual-design.svg";
@@ -18,59 +17,31 @@ import TimelineCard from "./TimelineCard";
 import moment from "moment";
 import Chip from "../clip/clip";
 import { FaRegEye } from "react-icons/fa6";
-import DraftDetailsCard from "./DraftDetailsCard";
 import FileCard from "./FileCard";
 
 const CreatorDetailCard = ({
-  brand,
   category,
-  lastUpdated,
-  projectName,
+  creatorName,
+  creatorInfo,
+  ongoingProject,
+  creatorSkills,
   projectOverview,
   projectObjective,
   projectDuration,
   projectDeadline,
   projectStatus,
   files,
-  reviews,
-  projectId,
   tabIndex,
   setTabIndex,
 }) => {
   const [viewProjects, setViewProjects] = useState(false);
   const [projectReport, setProjectReport] = useState(false);
+  const [sessionsClick, setSessionsClick] = useState(false);
 
-  const skills = ["Product Design", "Prototyping", "Design Thinking"];
   const TABS_CONTENT = ["Overview", "Timeline", "Assets", "Files", "Reviews"];
-
-  // Array of ongoing projects
-  const ongoingProject = [
-    {
-      id: 1, // Unique identifier for each project
-      projectName: "Food Website",
-      projectDescription:
-        "Made stunning food website design called foodworld design",
-      projectDeadline: "Sep 2, 2024",
-    },
-    {
-      id: 2,
-      projectName: "Food Website",
-      projectDescription:
-        "Made stunning food website design called foodworld design",
-      projectDeadline: "Sep 2, 2024",
-    },
-    {
-      id: 3,
-      projectName: "Food Website",
-      projectDescription:
-        "Made stunning food website design called foodworld design",
-      projectDeadline: "Sep 2, 2024",
-    },
-  ];
 
   const getInputFile = (e) => {
     e.preventDefault();
-    console.log("Files", e.target.files[0]);
   };
 
   const handleViewProjectsClick = () => {
@@ -85,22 +56,26 @@ const CreatorDetailCard = ({
     setProjectReport(!projectReport);
   };
 
+  const handleSessionsClick = () => {
+    setSessionsClick(!sessionsClick);
+  };
+
   const handleBackToProjects = () => {
     setProjectReport(!projectReport);
   };
 
   return (
-    <section className="flex flex-col p-4">
+    <section className="flex flex-col h-fit w-full flex-1 pr-2 justify-between flex-wrap gap-4 overflow-hidden overflow-y-auto custom-scrollbar scrollbar-md ">
       {/* Conditionally render content based on viewProjects */}
-      {!viewProjects && (
+      {!viewProjects && !projectReport && (
         <>
           {/* Header section with creator's image, name, and social links */}
-          <div className="flex justify-between w-full">
+          <header className="flex justify-between w-full">
             <div className="flex">
               <img src={CreatorImg} alt="creator-img" />
               <div className="flex flex-col justify-start">
                 <div className="flex m-2">
-                  <h1 className="mx-3">Sarah Miller</h1>
+                  <h1 className="mx-3">{creatorName}</h1>
                   <div className="flex">
                     <FaLinkedinIn className="opacity-55 mx-2 my-1" />
                     <FaBehance className="opacity-55 mx-2 my-1" />
@@ -108,10 +83,16 @@ const CreatorDetailCard = ({
                   </div>
                 </div>
                 <div className="flex gap-3 m-3">
-                  <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[25px] w-[110px] p-2 text-[11px] font-normal opacity-55 text-nowrap">
+                  <div
+                    className={`items-center rounded-xl text-center flex h-[25px] w-fit p-3 text-[11px] font-normal text-nowrap ${
+                      category === "Pro Designer"
+                        ? "bg-gradient-to-r from-[#FFE67B] via-[#FF8E8E] to-[#7D22FF] bg-clip-text text-transparent opacity-100 border-2 border-slate-800"
+                        : "opacity-55 bg-[#1a1a1a]"
+                    }`}
+                  >
                     {category}
                   </div>
-                  <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[25px] w-[110px] p-2 text-[11px] font-normal opacity-55 text-nowrap">
+                  <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[25px] w-[fit] p-3 text-[11px] font-normal opacity-55 text-nowrap">
                     Full Time Freelancer
                   </div>
                 </div>
@@ -119,11 +100,11 @@ const CreatorDetailCard = ({
             </div>
 
             {/* Button for assigning the creator */}
-            <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex w-[100px] h-[45px] p-2 text-[16px] font-normal opacity-55 mx-20 gap-2">
+            <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex w-fit h-[45px] p-3 text-[16px] font-normal opacity-55 mx-5 gap-2">
               <MdOutlinePersonAddAlt size={20} />
               <span className="py-2">Assign</span>
             </div>
-          </div>
+          </header>
 
           {/* Contact Information section */}
           <div className="flex justify-between mt-5 mb-2 ">
@@ -131,26 +112,15 @@ const CreatorDetailCard = ({
             <span className="opacity-55">Last updated : 1 Dec, 2024</span>
           </div>
           <div>
-            <div className="flex opacity-55 gap-5 items-center my-2">
-              <PiEnvelope size={20} />
-              <span>Sarah.miller@example.com</span>
-            </div>
-            <div className="flex opacity-55 gap-5 items-center my-2">
-              <MdOutlinePhone size={20} />
-              <span>+1 (555) 234- 5678</span>
-            </div>
-            <div className="flex opacity-55 gap-5 items-center my-2">
-              <IoLocationOutline size={20} />
-              <span>New York, NY</span>
-            </div>
-            <div className="flex opacity-55 gap-5 items-center my-2">
-              <IoEarthOutline size={20} />
-              <span>EST</span>
-            </div>
-            <div className="flex opacity-55 gap-5 items-center my-2">
-              <RiLetterSpacing2 size={20} />
-              <span>English, Hindi</span>
-            </div>
+            {creatorInfo.map((item, index) => (
+              <div
+                className="flex opacity-55 gap-5 items-center my-2"
+                key={index}
+              >
+                <item.icon size={20} />
+                <span>{item.value}</span>
+              </div>
+            ))}
           </div>
 
           {/* Projects section */}
@@ -173,7 +143,7 @@ const CreatorDetailCard = ({
               </div>
               {/* Button to toggle ongoing projects */}
               <div
-                className="bg-[#1A1A1A] items-center rounded-xl text-center flex w-[150px] h-[40px] p-2 text-[16px] font-normal gap-2 justify-center mt-2 cursor-pointer"
+                className="bg-[#1A1A1A] items-center rounded-xl text-center flex w-fit h-[40px] p-3 text-[16px] font-normal gap-2 justify-center mt-2 cursor-pointer"
                 onClick={handleViewProjectsClick}
               >
                 <span className="py-2">View Projects</span>
@@ -198,11 +168,11 @@ const CreatorDetailCard = ({
             <span>Area of expertise</span>
           </div>
           <div className="flex gap-4">
-            <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-2 text-[16px] w-[150px] font-normal gap-2 justify-center mt-2">
+            <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-2 text-[16px] w-fit font-normal gap-2 justify-center mt-2">
               <img src={VisualDesign} alt="visual-design-icon" />
               <span className="py-2 opacity-55">Visual Design</span>
             </div>
-            <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-2 text-[16px] w-[150px] font-normal gap-2 justify-center mt-2">
+            <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-2 text-[16px] w-fit font-normal gap-2 justify-center mt-2">
               <img src={UIDesign} alt="UI/UX-design-icon" />
               <span className="py-2 opacity-55">UX/UI Design</span>
             </div>
@@ -213,50 +183,86 @@ const CreatorDetailCard = ({
             <span>Skills</span>
           </div>
           <div className="flex gap-4">
-            {skills.map((skill, i) => (
+            {creatorSkills.map((skill, i) => (
               <div
-                className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-2 text-[16px] w-[150px] font-normal gap-2 justify-center mt-2"
-                key={i} // Use 'key' for proper rendering of lists
+                className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-3 text-[16px] w-fit font-normal gap-2 justify-center mt-2"
+                key={i}
               >
                 <span className="py-2 opacity-55">{skill}</span>
               </div>
             ))}
           </div>
+          <div className="flex mt-5 mb-2">
+            <span>Skills</span>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex gap-1 items-center">
+              <div
+                className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-3 text-[16px] w-fit font-normal gap-2 justify-center mt-2"
+                onClick={handleSessionsClick}
+              >
+                <LuTvMinimalPlay size={20} />
+                <span className="py-2 opacity-55">Sessions</span>
+              </div>
+            </div>
+            <div className="flex gap-1 items-center">
+              <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-3 text-[16px] w-fit font-normal gap-2 justify-center mt-2">
+                <TiMessages size={20} />
+                <span className="py-2 opacity-55">Message</span>
+              </div>
+            </div>
+            <div className="flex gap-1 items-center">
+              <div className="bg-[#1A1A1A] items-center rounded-xl flex h-[40px] p-3 text-[16px] w-fit font-normal gap-2 justify-center mt-2">
+                <ImBlocked size={20} className="text-[#FF8E8E]" />
+                <span className="py-2 opacity-55 text-[#FF8E8E80]">
+                  Report & Blacklist
+                </span>
+              </div>
+            </div>
+          </div>
         </>
       )}
 
-      {/* Display ongoing projects if viewProjects is true */}
-      {viewProjects && (
+      {/* Ongoing projects view */}
+      {viewProjects && !projectReport && !sessionsClick && (
         <>
           <div className="flex flex-col w-full">
-            <div className="flex gap-3 m-3 items-center">
-              <div
-                className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[45px] w-[45px] p-2 opacity-55 sm:h-[35px] sm:w-[35px] cursor-pointer"
-                onClick={handleBackClick}
-              >
-                <IoIosArrowRoundBack size={30} />
-              </div>
-              <span>Ongoing Projects</span>
-            </div>
-            <div className="flex m-3">
-              <img src={CreatorImg} alt="creator-img" />
-              <div className="flex flex-col justify-start">
-                <div className="flex m-2">
-                  <h1 className="mx-3">{}</h1>
+            <header>
+              <div className="flex gap-x-5 items-center">
+                <div
+                  className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[45px] w-fit p-2 opacity-55 sm:h-[35px] sm:w-[35px] cursor-pointer"
+                  onClick={handleBackClick}
+                >
+                  <IoIosArrowRoundBack size={30} />
                 </div>
-                <div className="flex gap-3 m-3">
-                  <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[25px] w-[110px] p-2 text-[11px] font-normal opacity-55 text-nowrap">
-                    {category}
+                <span>Ongoing Projects</span>
+              </div>
+              <div className="flex m-3">
+                <img src={CreatorImg} alt="creator-img" />
+                <div className="flex flex-col justify-start">
+                  <div className="flex m-2">
+                    <h1 className="mx-3">{creatorName}</h1>
+                  </div>
+                  <div className="flex gap-3 m-3">
+                    <div
+                      className={`items-center rounded-xl text-center flex h-[25px] w-fit p-3 text-[11px] font-normal text-nowrap ${
+                        category === "Pro Designer"
+                          ? "bg-gradient-to-r from-[#FFE67B] via-[#FF8E8E] to-[#7D22FF] bg-clip-text text-transparent opacity-100 border-2 border-slate-800"
+                          : "opacity-55 bg-[#1a1a1a]"
+                      }`}
+                    >
+                      {category}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </header>
 
             {/* Loop through ongoing projects */}
             {ongoingProject.map((project) => (
               <div
                 className="m-3 w-full p-4 bg-[#121212] rounded-2xl"
-                key={project.id} // Unique key for each project
+                key={project.id}
               >
                 <div className="flex justify-between">
                   <div className="flex gap-3">
@@ -268,11 +274,11 @@ const CreatorDetailCard = ({
                     </div>
                   </div>
 
-                  <div className="flex bg-[#1A1A1A] items-center rounded-xl text-center h-[45px] p-2 text-nowrap cursor-pointer">
-                    <IoFolderOutline
-                      className="mx-2"
-                      onClick={handleProjectReportClick}
-                    />
+                  <div
+                    className="flex bg-[#1A1A1A] items-center rounded-xl text-center h-[45px] p-3 text-nowrap cursor-pointer"
+                    onClick={handleProjectReportClick}
+                  >
+                    <IoFolderOutline className="mx-2" />
                     <span className="text-nowrap">Project Report</span>
                   </div>
                 </div>
@@ -318,61 +324,76 @@ const CreatorDetailCard = ({
           </div>
         </>
       )}
+
+      {/* Project Report */}
       {projectReport && (
         <>
-          <div className="flex flex-col">
-            <div className="flex gap-3 m-3 items-center">
-              <div
-                className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[45px] w-[45px] p-2 opacity-55 sm:h-[35px] sm:w-[35px] cursor-pointer"
-                onClick={handleBackToProjects}
-              >
-                <IoIosArrowRoundBack size={30} />
+          <header className="flex flex-col ">
+            <div className="flex items-center justify-between">
+              <div className="flex gap-3 m-3 items-center">
+                <div
+                  className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[45px] w-fit p-2 opacity-55 sm:h-[35px] sm:w-[35px] cursor-pointer"
+                  onClick={handleBackToProjects}
+                >
+                  <IoIosArrowRoundBack size={30} />
+                </div>
+                <span>{ongoingProject[1].projectName}</span>
               </div>
-              <span>Ongoing Projects</span>
+              <span className="opacity-55">
+                Last Updated : {ongoingProject[1].projectDeadline}
+              </span>
             </div>
+
             <div className="flex m-3">
               <img src={CreatorImg} alt="creator-img" />
               <div className="flex flex-col justify-start">
                 <div className="flex m-2">
-                  <h1 className="mx-3">Sarah Miller</h1>
+                  <h1 className="mx-3">{creatorName}</h1>
                 </div>
                 <div className="flex gap-3 m-3">
-                  <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[25px] w-[110px] p-2 text-[11px] font-normal opacity-55 text-nowrap">
+                  <div
+                    className={`items-center rounded-xl text-center flex h-[25px] w-fit p-3 text-[11px] font-normal text-nowrap ${
+                      category === "Pro Designer"
+                        ? "bg-gradient-to-r from-[#FFE67B] via-[#FF8E8E] to-[#7D22FF] bg-clip-text text-transparent opacity-100 border-2 border-slate-800"
+                        : "opacity-55 bg-[#1a1a1a]"
+                    }`}
+                  >
                     {category}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex h-fit gap-x-10 pt-6 border-b-2 border-[#292929]">
+          </header>
+          <div className="flex h-fit gap-x-10 pt-3 overflow-hidden overflow-y-auto custom-scrollbar scrollbar-sm border-b-2 border-[#292929] ">
             {TABS_CONTENT.map((ele, ind) => (
               <p
                 className={`font-thin text-lg cursor-pointer w-20 text-center  pb-2 mb-[1.5px] ${
                   tabIndex === ind
-                    ? "text-[#e1ff26] opacity-100 border-b-2 border-[#e1ff26]"
+                    ? "text-[#fcfcd8] opacity-100 shadow-[0_2px_0px_rgba(0,0,0,0.1)] shadow-white border-[#fcfcd8]"
                     : "opacity-55"
                 }`}
+                key={ind}
                 onClick={() => setTabIndex(ind)}
               >
                 {ele}
               </p>
             ))}
           </div>
-          <div className="pt-4 w-full flex-1 overflow-hidden">
+          <div className="pt-4 w-full flex-1">
             {/**----------------------------- OVERVIEW SECTION -------------------------------------- */}
             {tabIndex === 0 && (
               <div className=" w-full h-full pr-2 overflow-y-auto custom-scrollbar scrollbar-sm">
-                {/* <div>
+                <div>
                   <h5 className="text-lg">Project Overview</h5>
                   <p className="text-[15px] opacity-55 font-thin  my-6 ">
                     {`${projectOverview}`}
                   </p>
-                </div> */}
+                </div>
                 <div>
                   <h5 className="text-lg ">Project Objective:</h5>
-                  {/* <p className="text-[15px] opacity-55 font-thin mt-2">
+                  <p className="text-[15px] opacity-55 font-thin mt-2">
                     {`${projectObjective}`}
-                  </p> */}
+                  </p>
                 </div>
                 <button className="flex items-center bg-[#20201e] px-3 py-2 gap-x-2 text-xs border border-[#343432] rounded-full my-6">
                   <FaRegEye /> View Brief
@@ -417,16 +438,16 @@ const CreatorDetailCard = ({
                   </div>
                   <div className="flex items-center gap-x-5">
                     <p>Status: </p>
-                    {/* <p
-                    className={`text-[11px] px-3 py-1 rounded-full  ${
-                      projectStatus === "Completed"
-                        ? "text-white bg-green-600"
-                        : "text-[#e1ff26] bg-[#3d3e3e]"
-                    }`}
-                  >
-                    {projectStatus}
-                  </p> */}
-                    {/* <Chip
+                    <p
+                      className={`text-[11px] px-3 py-1 rounded-full  ${
+                        projectStatus === "Completed"
+                          ? "text-white bg-green-600"
+                          : "text-[#e1ff26] bg-[#3d3e3e]"
+                      }`}
+                    >
+                      {projectStatus}
+                    </p>
+                    <Chip
                       text={projectStatus}
                       bgCol={
                         projectStatus === "Completed" ? "#049668" : "#3d3e3e"
@@ -434,7 +455,7 @@ const CreatorDetailCard = ({
                       textCol={
                         projectStatus === "Completed" ? "#ffffff" : "#e1ff26"
                       }
-                    /> */}
+                    />
                     <p>Final Draft Shared. Working on feedback.</p>
                   </div>
                 </div>
@@ -506,20 +527,17 @@ const CreatorDetailCard = ({
 
             {/**---------------------------- REVIEWS SECTION ------------------------------------- */}
             {tabIndex === 3 && (
-              <div className="w-full h-full overflow-x-hidden overflow-y-auto custom-scrollbar scrollbar-sm  pr-2 flex flex-col gap-y-4">
-                {reviews?.map((ele) => (
-                  <DraftDetailsCard
-                    key={ele}
-                    draftName={`Draft ${ele}`}
-                    projectName={"Illustration Design"}
-                    projectId={projectId}
-                    draftId={ele}
-                  />
-                ))}
-              </div>
+              <div className="w-full h-full overflow-x-hidden overflow-y-auto custom-scrollbar scrollbar-sm  pr-2 flex flex-col gap-y-4"></div>
             )}
           </div>
         </>
+      )}
+      {sessionsClick && (
+        <div className="flex justify-center items-center h-full w-full p-5">
+          <p className="text-lg font-medium text-white">
+            Please select a project or report to view details.
+          </p>
+        </div>
       )}
     </section>
   );

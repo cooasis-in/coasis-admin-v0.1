@@ -4,8 +4,15 @@ import DesignerImg from "../assets/images/image 54.svg";
 import { APP_URL } from "./url";
 import { FiHome, FiUsers } from "react-icons/fi";
 import { BsLightningCharge } from "react-icons/bs";
-import { PiEnvelopeLight } from "react-icons/pi";
-import { IoCalendarClearOutline, IoColorPaletteOutline } from "react-icons/io5";
+import { PiEnvelope, PiEnvelopeLight } from "react-icons/pi";
+import {
+  IoCalendarClearOutline,
+  IoColorPaletteOutline,
+  IoEarthOutline,
+  IoLocationOutline,
+} from "react-icons/io5";
+import { MdOutlinePhone } from "react-icons/md";
+import { RiLetterSpacing2 } from "react-icons/ri";
 
 export const ProjectList = [
   {
@@ -711,7 +718,7 @@ export const MENU_ITEMS = [
   {
     name: "index",
     url: APP_URL.INDEX,
-    icon: PiEnvelopeLight,
+    icon: PiEnvelope,
   },
   {
     name: "meetings",
@@ -723,9 +730,53 @@ export const MENU_ITEMS = [
 export const creatorCardData = [
   {
     id: 1,
-    name: "Sarah Miller",
+    name: "Emily Jameson",
     creatorCategory: "Beginner Creator",
     status: "Not Started",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "emily.jameson@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+1 234 567 8900",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "New York, NY",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "EST" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, Hindi",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Designed a food website called Foodworld.",
     overview:
       "This project focuses on creating a user-friendly and visually appealing website for a food-related platform. The website will serve as a central hub for users to explore a vast collection of recipes, learn about ingredients, and engage with a community of food enthusiasts. Key functionalities include browsing, saving, and filtering recipes by various parameters such as cuisine, dietary restrictions, and preparation time. The design aims to balance functionality with aesthetic appeal, providing a seamless user experience across devices.",
@@ -748,9 +799,53 @@ export const creatorCardData = [
   },
   {
     id: 2,
-    name: "Sarah Miller",
+    name: "Liam Smith",
     creatorCategory: "Experienced",
     status: "In Progress",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "liam.smith@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+44 789 012 3456",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "London, UK",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "GMT" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, French",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Revamped an e-commerce website's UI.",
     overview:
       "This project focused on modernizing an e-commerce platform to enhance user experience and drive sales. The redesign includes improvements in navigation, product visibility, and checkout processes to create a seamless, engaging shopping journey. Special attention was given to mobile and cross-device usability, ensuring that users could enjoy a consistent experience regardless of their browsing device. The project also integrates dynamic elements, such as recommended products and personalized shopping suggestions, to enrich the browsing experience.",
@@ -773,9 +868,53 @@ export const creatorCardData = [
   },
   {
     id: 3,
-    name: "Sarah Miller",
+    name: "Sofia Garcia",
     creatorCategory: "Pro Designer",
     status: "First Draft",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "sofia.garcia@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+61 432 987 654",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "Sydney, Australia",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "AEST" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, Mandarin",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Designed UI for a recipe app.",
     overview:
       "The aim of this project was to design a vibrant and user-friendly interface for a recipe app, intended for mobile use. The app allows users to explore, save, and share various recipes from different cuisines. The design emphasizes easy navigation and appealing visuals that make discovering and preparing recipes enjoyable. With extensive filtering options and an intuitive layout, the app also integrates user-generated content, allowing users to review and rate recipes.",
@@ -798,9 +937,53 @@ export const creatorCardData = [
   },
   {
     id: 4,
-    name: "Sarah Miller",
+    name: "Amanda Lee",
     creatorCategory: "Aspiring Creator",
     status: "Revision",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "amanda.lee@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+33 1 234 567 890",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "Paris, France",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "CET" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "French, English",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Developed a digital lookbook for fashion.",
     overview:
       "This project was about creating a digital lookbook for a seasonal fashion collection, showcasing various outfits and styles in a visually captivating manner. Targeted at a young, fashion-forward audience, the design combines high-resolution images and smooth transitions to present fashion trends. The lookbook incorporates interactive elements, allowing users to explore outfit details and seamlessly navigate between different styles.",
@@ -823,9 +1006,53 @@ export const creatorCardData = [
   },
   {
     id: 5,
-    name: "Sarah Miller",
+    name: "Michael Park",
     creatorCategory: "Experienced",
     status: "Final Draft",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "michael.park@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+1 555 123 4567",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "Chicago, IL",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "CST" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, Korean",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Enhanced a marketplace platform's UI.",
     overview:
       "This project focused on optimizing the user experience and interface of a marketplace platform by streamlining navigation, enhancing filter options, and improving loading speed. The design aimed to facilitate easy product search and discovery for users. Key improvements include faster loading times, simplified layouts, and more intuitive category-based filtering to make the shopping experience smoother and more efficient.",
@@ -845,13 +1072,56 @@ export const creatorCardData = [
     ],
     teams: [13, 14, 15],
     reviews: [9, 10],
-    
   },
   {
     id: 6,
-    name: "Sarah Miller",
+    name: "Olivia Rodriguez",
     creatorCategory: "Pro Designer",
     status: "Completed",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "olivia.rodriguez@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+34 910 234 567",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "Madrid, Spain",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "CET" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "Spanish, English",
+      },
+    ],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
     description: "Created a UI for a travel blog platform.",
     overview:
       "This project aimed to design a sleek and intuitive interface for a travel blog, where users can share travel stories, tips, and photos. The platform encourages community engagement and aims to be a go-to resource for travel enthusiasts. The design emphasizes readability, easy navigation, and seamless media integration, allowing users to enjoy a smooth browsing experience as they explore diverse travel content.",
@@ -861,65 +1131,153 @@ export const creatorCardData = [
     deadline: "2025-01-05",
     brand: "Lonely Planet",
     category: "Blog Website",
-    lastUpdated: "2024-11-05",
+    lastUpdated: "2024-12-05",
     files: [
-      { id: 1, name: "t1", type: "pdf", size: "8mb" },
-      { id: 2, name: "t2", type: "jpg", size: "6mb" },
-      { id: 3, name: "t3", type: "docx", size: "2mb" },
-      { id: 4, name: "t4", type: "xxl", size: "12mb" },
-      { id: 5, name: "t5", type: "pdf", size: "5mb" },
+      { id: 1, name: "t1", type: "jpg", size: "9mb" },
+      { id: 2, name: "t2", type: "pdf", size: "4mb" },
+      { id: 3, name: "t3", type: "xxl", size: "7mb" },
+      { id: 4, name: "t4", type: "pdf", size: "6mb" },
+      { id: 5, name: "t5", type: "docx", size: "3mb" },
     ],
     teams: [16, 17, 18],
     reviews: [11, 12],
   },
   {
     id: 7,
-    name: "Sarah Miller",
-    creatorCategory: "Beginner Creator",
-    status: "Final Draft",
-    description: "Enhanced a marketplace platform's UI.",
-    overview:
-      "This project focused on optimizing the user experience and interface of a marketplace platform by streamlining navigation, enhancing filter options, and improving loading speed. The design aimed to facilitate easy product search and discovery for users. Key improvements include faster loading times, simplified layouts, and more intuitive category-based filtering to make the shopping experience smoother and more efficient.",
-    objective:
-      "The objective was to improve the site’s overall usability and performance. Specific goals included boosting loading speed, enhancing filter and search functionalities, and ensuring cross-device compatibility. The redesign prioritizes user engagement through an optimized and visually cohesive layout.",
-    duration: "5 Weeks",
-    deadline: "2024-12-01",
-    brand: "Flipkart",
-    category: "E-Commerce",
-    lastUpdated: "2024-11-06",
-    files: [
-      { id: 1, name: "m1", type: "docx", size: "4mb" },
-      { id: 2, name: "m2", type: "pdf", size: "7mb" },
-      { id: 3, name: "m3", type: "jpg", size: "5mb" },
-      { id: 4, name: "m4", type: "xxl", size: "11mb" },
-      { id: 5, name: "m5", type: "pdf", size: "6mb" },
+    name: "John Smith",
+    creatorCategory: "Experienced",
+    status: "In Progress",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "john.smith@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+44 789 045 3456",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "London, UK",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "GMT" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, French",
+      },
     ],
-    teams: [13, 14, 15],
-    reviews: [9, 10],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
+    description: "Revamped an e-commerce website's UI.",
+    overview:
+      "This project focused on modernizing an e-commerce platform to enhance user experience and drive sales. The redesign includes improvements in navigation, product visibility, and checkout processes to create a seamless, engaging shopping journey. Special attention was given to mobile and cross-device usability, ensuring that users could enjoy a consistent experience regardless of their browsing device. The project also integrates dynamic elements, such as recommended products and personalized shopping suggestions, to enrich the browsing experience.",
+    objective:
+      "The primary objective was to boost user engagement and conversion rates. Key goals included making navigation intuitive, enhancing filter and search functionalities, simplifying the checkout process, and using engaging visual elements to attract and retain customers. The design ensures fast loading times, mobile responsiveness, and accessible layout for improved site usability.",
+    duration: "4 Weeks",
+    deadline: "2024-11-30",
+    brand: "Amazon",
+    category: "Shopping Website",
+    lastUpdated: "2024-11-09",
+    files: [
+      { id: 1, name: "e1", type: "pdf", size: "10mb" },
+      { id: 2, name: "e2", type: "jpg", size: "5mb" },
+      { id: 3, name: "e3", type: "docx", size: "3mb" },
+      { id: 4, name: "e4", type: "pdf", size: "6mb" },
+      { id: 5, name: "e5", type: "xxl", size: "12mb" },
+    ],
+    teams: [4, 5, 6],
+    reviews: [3, 4],
   },
   {
     id: 8,
-    name: "Sarah Miller",
-    creatorCategory: "Experienced",
-    status: "Revision",
-    description: "Developed a digital lookbook for fashion.",
-    overview:
-      "This project was about creating a digital lookbook for a seasonal fashion collection, showcasing various outfits and styles in a visually captivating manner. Targeted at a young, fashion-forward audience, the design combines high-resolution images and smooth transitions to present fashion trends. The lookbook incorporates interactive elements, allowing users to explore outfit details and seamlessly navigate between different styles.",
-    objective:
-      "The primary objective was to create an immersive, visually appealing experience that reflects the brand’s aesthetic and entices users. Key goals included enhancing interactivity, providing a smooth browsing experience, and enabling shopping links for easy purchasing. The lookbook is designed to be mobile-friendly and accessible across various devices.",
-    duration: "3 Weeks",
-    deadline: "2024-12-15",
-    brand: "H&M",
-    category: "Fashion Website",
-    lastUpdated: "2024-11-07",
-    files: [
-      { id: 1, name: "f1", type: "pdf", size: "5mb" },
-      { id: 2, name: "f2", type: "jpg", size: "9mb" },
-      { id: 3, name: "f3", type: "docx", size: "4mb" },
-      { id: 4, name: "f4", type: "xxl", size: "14mb" },
-      { id: 5, name: "f5", type: "pdf", size: "6mb" },
+    name: "Shaffi jons ",
+    creatorCategory: "Pro Designer",
+    status: "First Draft",
+    contactInformation: [
+      {
+        type: "Email",
+        icon: PiEnvelope,
+        value: "shaffi.jons@example.com",
+      },
+      {
+        type: "Phone",
+        icon: MdOutlinePhone,
+        value: "+61 432 987 789",
+      },
+      {
+        type: "Location",
+        icon: IoLocationOutline,
+        value: "Sydney, Australia",
+      },
+      { type: "Region", icon: IoEarthOutline, value: "AEST" },
+      {
+        type: "Language",
+        icon: RiLetterSpacing2,
+        value: "English, Mandarin",
+      },
     ],
-    teams: [10, 11, 12],
-    reviews: [7, 8],
+    ongoingProject: [
+      {
+        id: 1,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 2,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+      {
+        id: 3,
+        projectName: "Food Website",
+        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDeadline: "Fab 2, 2025",
+      },
+    ],
+    skills: ["Product Design", "Prototyping", "Design Thinking"],
+    description: "Designed UI for a recipe app.",
+    overview:
+      "The aim of this project was to design a vibrant and user-friendly interface for a recipe app, intended for mobile use. The app allows users to explore, save, and share various recipes from different cuisines. The design emphasizes easy navigation and appealing visuals that make discovering and preparing recipes enjoyable. With extensive filtering options and an intuitive layout, the app also integrates user-generated content, allowing users to review and rate recipes.",
+    objective:
+      "To create an engaging mobile interface that provides quick and easy access to recipes. Specific goals include developing a highly responsive design, supporting content personalization based on user preferences, and ensuring an inclusive experience by following accessibility standards. The UI is optimized for small screens, with features like quick filters, favorites, and recommendations to enhance user satisfaction.",
+    duration: "2 Weeks",
+    deadline: "2024-12-20",
+    brand: "Zomato",
+    category: "Mobile App",
+    lastUpdated: "2024-11-08",
+    files: [
+      { id: 1, name: "r1", type: "jpg", size: "8mb" },
+      { id: 2, name: "r2", type: "pdf", size: "3mb" },
+      { id: 3, name: "r3", type: "xxl", size: "13mb" },
+      { id: 4, name: "r4", type: "pdf", size: "4mb" },
+      { id: 5, name: "r5", type: "docx", size: "2mb" },
+    ],
+    teams: [7, 8, 9],
+    reviews: [5, 6],
   },
 ];

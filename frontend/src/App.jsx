@@ -11,6 +11,7 @@ import OpenProjects from "./pages/Projects/OpenProjects";
 import ClosedProjects from "./pages/Projects/ClosedProjects";
 import Creators from "./pages/yourTeam/Creators";
 import Brands from "./pages/yourTeam/Brands";
+import Chat from "./pages/Index/Chat";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path={APP_URL.OPENPROJECTS} element={<OpenProjects />} />
         <Route path={APP_URL.CLOSEDPROJECTS} element={<ClosedProjects />} />
         <Route path={APP_URL.CREATORS} element={<Creators />} />
+        <Route path={APP_URL.INDEX} element={<Chat />} />
         <Route path={APP_URL.BRANDS} element={<Brands />} />
         <Route path={APP_URL.ESCALATE} element={<Escalate />} />
         <Route path={APP_URL.MEETINGS} element={<Meetings />} />
