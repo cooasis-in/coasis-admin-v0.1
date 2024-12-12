@@ -5,7 +5,11 @@ import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-const PriorityTable = ({ currentPage, itemsPerPage, filteredProjects=[] }) => {
+const PriorityTable = ({
+  currentPage,
+  itemsPerPage,
+  filteredProjects = [],
+}) => {
   const location = useLocation();
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
   const [actionStatusMenuIndex, setActionStatusMenuIndex] = useState(null);
@@ -13,9 +17,10 @@ const PriorityTable = ({ currentPage, itemsPerPage, filteredProjects=[] }) => {
   // Pagination logic
   const indexOfLastProject = currentPage * itemsPerPage;
   const indexOfFirstProject = indexOfLastProject - itemsPerPage;
-  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
-
-  console.log("Filtered Projects:", filteredProjects);  // Debugging line to check passed data
+  const currentProjects = filteredProjects.slice(
+    indexOfFirstProject,
+    indexOfLastProject
+  );
 
   const baseHeaders = [
     "Customer Details",
@@ -49,7 +54,6 @@ const PriorityTable = ({ currentPage, itemsPerPage, filteredProjects=[] }) => {
     document.addEventListener("click", closeDropdowns);
     return () => document.removeEventListener("click", closeDropdowns);
   }, []);
-
 
   return (
     <div className="bg-[#121212] flex flex-col justify-between p-4 rounded-2xl w-full h-[100%] overflow-y-auto custom-scrollbar scrollbar-md">

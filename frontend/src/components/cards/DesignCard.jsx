@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DraftDetailsCard = () => {
+const DesignCard = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const DraftDetailsCard = () => {
   )
 }
 
-export default DraftDetailsCard
+export default DesignCard
