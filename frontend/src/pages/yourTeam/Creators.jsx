@@ -6,6 +6,10 @@ import { creatorCardData } from "../../config"; // Assuming this is your data fi
 import CreatorDetailCard from "../../components/cards/CreatorDetailCard";
 import YourTeamBandwidth from "../../assets/images/your-team-bandwidth.svg";
 import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import ViewProjectCard from "../../components/cards/viewProjectCard";
+import ProjectReportCard from "../../components/cards/ProjectReportCard";
+import SessionCard from "../../components/cards/SessionCard";
+// Updated import
 
 const creatorCategoryOptions = [
   "All Creators",
@@ -19,20 +23,16 @@ const Creators = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const initialProjectId = Number(searchParams.get("project")) || 1;
-
+  const initialCreatorId = Number(searchParams.get("creator")) || 1;
   const [filteredProjects, setFilteredProjects] = useState(creatorCardData);
-  const [selectedDraft, setSelectedDraft] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(initialProjectId);
+  const [selectedCreator, setSelectedCreator] = useState(initialCreatorId);
   const [tabIndex, setTabIndex] = useState(0);
 
   // Update selected project and draft when URL params change
   useEffect(() => {
-    const projectParam = Number(searchParams.get("project"));
-    const draftParam = Number(searchParams.get("draft"));
-    
-    if (projectParam) setSelectedProject(projectParam);
-    if (draftParam) setSelectedDraft(draftParam);
+    const creatorParam = Number(searchParams.get("creator"));
+
+    if (creatorParam) setSelectedCreator(creatorParam);
   }, [searchParams]);
 
   // Filter projects based on selected creator category
@@ -40,8 +40,8 @@ const Creators = () => {
     e.preventDefault();
     const category = e.target.value;
     setFilteredProjects(
-      category === "All Creators" 
-        ? creatorCardData 
+      category === "All Creators"
+        ? creatorCardData
         : creatorCardData.filter((ele) => ele.creatorCategory === category)
     );
   };
@@ -83,15 +83,16 @@ const Creators = () => {
               </div>
             </header>
             {/* Creator Cards */}
-            <div className="w-full flex-1 pr-2 flex justify-between flex-wrap gap-4 overflow-y-auto custom-scrollbar scrollbar-md">
+            <div className="w-full flex-1 pr-2 flex justify-between flex-wrap gap-4 overflow-y-auto custom-scrollbar scrollbar-md max-h-[calc(100vh-200px)]">
               {filteredProjects.map((ele) => (
                 <div key={ele.id} className="basis-[48%]">
                   <CreatorCards
                     id={ele.id}
                     creatorName={ele.name}
+                    creatorImage={ele.creatorImage}
                     creatorCategory={ele.creatorCategory}
                     setTabIndex={setTabIndex}
-                    selectedProject={selectedProject}
+                    selectedCreator={selectedCreator}
                   />
                 </div>
               ))}
@@ -103,17 +104,47 @@ const Creators = () => {
         <div className="border-l-2 border-[#FCFCD817] h-full opacity-40"></div>
 
         {/* Right Section: Creator Detail */}
-        <section className="basis-[40%] flex flex-col overflow-hidden">
+        <section className="basis-[40%] flex flex-col">
           <div className="p-4 gap-3">
-            {!location?.search?.includes("draft") && 
+            {!location?.search?.includes("view-project") &&
+              !location?.search?.includes("project-report") && !location?.search?.includes("sessions") &&
               creatorCardData
-                .filter((ele) => ele.id === selectedProject)
+                .filter((ele) => ele.id === selectedCreator)
                 .map((ele) => (
                   <CreatorDetailCard
                     key={ele.id}
+                    id={ele.id}
                     category={ele.creatorCategory}
+                    creatorInfo={ele.contactInformation}
                     lastUpdated={ele.deadline}
                     creatorName={ele.name}
+                    ongoingProject={ele.ongoingProject}
+                    creatorSkills={ele.skills}
+                  />
+                ))}
+            {location?.search?.includes("view-project") &&
+              !location?.search?.includes("project-report") &&
+              creatorCardData
+                .filter((ele) => ele.id === selectedCreator)
+                .map((ele) => (
+                  <ViewProjectCard
+                    key={ele.id}
+                    id={ele.id}
+                    creatorName={ele.name}
+                    ongoingProject={ele.ongoingProject}
+                    category={ele.creatorCategory}
+                  />
+                ))}
+            {location?.search?.includes("project-report") &&
+              creatorCardData
+                .filter((ele) => ele.id === selectedCreator)
+                .map((ele) => (
+                  <ProjectReportCard
+                    key={ele.id}
+                    id={ele.id}
+                    creatorName={ele.name}
+                    ongoingProject={ele.ongoingProject}
+                    category={ele.creatorCategory}
                     creatorInfo={ele.contactInformation}
                     projectOverview={ele.overview}
                     projectObjective={ele.objective}
@@ -121,12 +152,15 @@ const Creators = () => {
                     projectStatus={ele.status}
                     files={ele.files}
                     tabIndex={tabIndex}
-                    ongoingProject={ele.ongoingProject}
-                    creatorSkills={ele.skills}
                     setTabIndex={setTabIndex}
                   />
-                ))
-            }
+                ))}
+            {location?.search?.includes("sessions") &&
+              creatorCardData
+                .filter((ele) => ele.id === selectedCreator)
+                .map((ele) => (
+                  <SessionCard key={ele.id} creatorName={ele.name} />
+                ))}
           </div>
         </section>
       </div>

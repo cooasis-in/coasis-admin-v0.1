@@ -122,30 +122,28 @@ function DashboardLayout({ children }) {
               } gap-y-[1rem] `}
             >
               {MENU_ITEMS.map((ele, index) => {
+                const isActive =
+                  pathname?.includes(ele?.name) || pathname === ele.url;
+                const isSubMenuActive = openSubMenu === index;
+
                 return (
                   <div key={index} onClick={() => handleMenuClick(index)}>
                     <Link to={ele?.url}>
                       {isSidebarOpen ? (
                         <div
                           className={`${
-                            (pathname?.includes(ele?.name) ||
-                              pathname === ele.url) &&
-                            "bg-[#141414] "
-                          } flex items-center rounded-xl hover:bg-[#141414] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out w-40`}
+                            isActive && "shadow-lg"
+                          } flex items-center rounded-xl overflow-hidden cursor-pointer transition-all duration-500 ease-in-out w-40 hover:shadow-[4px_0px_10px_-3px_rgba(0,0,0,0.1)]`}
                         >
                           <div
-                            key={index}
                             className={`p-[0.8rem] ${
-                              (pathname?.includes(ele?.name) ||
-                                pathname === ele.url) &&
-                              "glow-effect-container"
-                            } `}
+                              isActive && "glow-effect-container"
+                            }`}
                           >
                             <ele.icon
                               size={20}
                               className={`transition-all duration-500 ease-in-out ${
-                                pathname?.includes(ele?.name) ||
-                                pathname === ele.url
+                                isActive
                                   ? "text-glow glow-effect-icon scale-110"
                                   : "text-[#424e50]"
                               }`}
@@ -153,9 +151,7 @@ function DashboardLayout({ children }) {
                           </div>
                           <p
                             className={`first-letter:uppercase ${
-                              (!pathname?.includes(ele?.name) ||
-                                !pathname === ele.url) &&
-                              "opacity-55"
+                              isActive && "opacity-100"
                             }`}
                           >
                             {ele.name}
@@ -163,13 +159,12 @@ function DashboardLayout({ children }) {
                           {ele.subMenu && ele.subMenu.length > 0 && (
                             <div
                               className={`transition-all duration-500 ease-in-out ml-5 ${
-                                pathname?.includes(ele?.name) ||
-                                pathname === ele.url
+                                isActive
                                   ? "text-glow glow-effect-icon scale-110"
                                   : "text-[#424e50]"
                               }`}
                             >
-                              {openSubMenu === index ? (
+                              {isSubMenuActive ? (
                                 <MdKeyboardArrowUp />
                               ) : (
                                 <MdKeyboardArrowDown />
@@ -178,27 +173,16 @@ function DashboardLayout({ children }) {
                           )}
                         </div>
                       ) : (
-                        <div
-                          className={`${
-                            (pathname?.includes(ele?.name) ||
-                              pathname === ele.url) &&
-                            " rounded-xl bg-[#141414]"
-                          }`}
-                        >
+                        <div className={`${isActive && "shadow-lg"}`}>
                           <div
-                            key={index}
                             className={`p-[0.8rem] ${
-                              pathname?.includes(ele?.name) ||
-                              pathname === ele.url
-                                ? "glow-effect-container bg-[#141414]"
-                                : ""
+                              isActive && "glow-effect-container"
                             } cursor-pointer transition-all duration-500 ease-in-out`}
                           >
                             <ele.icon
                               size={20}
                               className={`transition-all duration-500 ease-in-out ${
-                                pathname?.includes(ele?.name) ||
-                                pathname === ele.url
+                                isActive
                                   ? "text-[#FCFCD8] glow-effect-icon scale-110"
                                   : "text-[#424e50]"
                               }`}
@@ -212,7 +196,7 @@ function DashboardLayout({ children }) {
                     {ele.subMenu && ele.subMenu.length > 0 && (
                       <div
                         className={`ml-4 mt-2 flex flex-col ${
-                          openSubMenu === index ? "block" : "hidden"
+                          isSubMenuActive ? "block" : "hidden"
                         }`}
                       >
                         {ele.subMenu.map((sub, subIndex) => (
@@ -221,9 +205,9 @@ function DashboardLayout({ children }) {
                               className={`${
                                 pathname?.includes(sub.name) ||
                                 pathname === sub.url
-                                  ? "bg-[#141414] "
+                                  ? "shadow-lg"
                                   : "opacity-55"
-                              } flex items-center rounded-xl cursor-pointer p-[0.8rem] transition-all duration-500 ease-in-out w-40`}
+                              } flex items-center rounded-xl cursor-pointer p-[0.8rem] transition-all duration-500 ease-in-out w-40 hover:shadow-[4px_0px_10px_-3px_rgba(0,0,0,0.1)]`}
                             >
                               <p className="ml-2">{sub.name}</p>
                             </div>

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { IoCheckmark } from "react-icons/io5";
+import styles from "./authLayout.module.css";
+import { useLocation } from "react-router-dom";
+import BackButton from "./BackButton";
 
-// Images
-import cohyveLogo from "../../assets/images/CohyveLogo_admin.svg"
+// images
+import cooasisLogo from "../../assets/images/cooasis.svg";
+import cohyveLogo from "../../assets/images/cohyve_logo.svg";
 
 // background video
 import oneBgVideo from "../../assets/videos/01_bg.webm";
@@ -38,16 +41,8 @@ const videoSources = [
   fifteenBgVideo,
 ];
 
-const benefits = [
-  "Project in your inbox",
-  "Upskill your skillset",
-  "Manage everything at one place",
-  "Work with top brands Pan India",
-  "connect, collaborate & create",
-];
-
-function OnbordingLayout({ children }) {
-  //   const location = useLocation();
+function AuthLayout({ children }) {
+  const location = useLocation();
   const [randomVideo, setRandomVideo] = useState(null);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
 
@@ -63,8 +58,7 @@ function OnbordingLayout({ children }) {
 
   return (
     <div className="w-screen h-screen flex">
-      {/* Left Part */}
-      <div className={` w-[65%] relative`}>
+      <div className={`${styles.left} w-[65%] relative`}>
         {randomVideo && (
           <video
             src={randomVideo}
@@ -85,7 +79,11 @@ function OnbordingLayout({ children }) {
           </div>
         </div>
       </div>
-      {/* Right Part */}
+      {/* Back Button */}
+      {location.pathname !== "/" && location.pathname !== "/signin" && (
+        <BackButton />
+      )}
+
       <div className="right w-[35%] text-center flex items-center justify-center h-full bg-[#050505] py-[3.5rem] px-[6rem]">
         {children}
       </div>
@@ -93,4 +91,4 @@ function OnbordingLayout({ children }) {
   );
 }
 
-export default OnbordingLayout;
+export default AuthLayout;

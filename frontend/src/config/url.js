@@ -4,7 +4,7 @@ export const APP_URL = {
   HOME: "/",
   OPENPROJECTS:"/projects/open-projects",
   CLOSEDPROJECTS: "/projects/closed-projects",
-  CREATORS: "/you-team/creators",
+  CREATORS: "/your-team",
   BRANDS: "/you-team/brands",
   ESCALATE: "/escalate",
   INDEX: "/index",

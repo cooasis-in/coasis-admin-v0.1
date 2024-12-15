@@ -1,80 +1,91 @@
-import moment from "moment";
-import React, { useState } from "react";
-import { TbUsers } from "react-icons/tb";
-import { FaRegEye } from "react-icons/fa";
-import { MdOutlineWatchLater } from "react-icons/md";
-import Avatar from "../avatar/Avatar";
-import FileCard from "./FileCard";
-import DraftDetailsCard from "./DraftDetailsCard";
+import React from "react";
 import TimelineCard from "./TimelineCard";
-import Chip from "../chip/Chip";
+import CreatorImg from "../../assets/images/Mask group.svg";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { FaRegEye } from "react-icons/fa6";
+import { MdOutlineWatchLater } from "react-icons/md";
+import Chip from "../clip/clip";
+import moment from "moment";
+import FileCard from "./FileCard";
+import { useNavigate } from "react-router-dom";
 
-const TABS_CONTENT = ["Overview", "Timeline", "Files", "Reviews"];
-
-const ProjectDetailsCard = ({
-  brand,
+const ProjectReportCard = ({
+  projectId,
   category,
-  lastUpdated,
-  projectName,
+  creatorName,
   projectOverview,
   projectObjective,
   projectDuration,
   projectDeadline,
   projectStatus,
   files,
-  reviews,
-  projectId,
   tabIndex,
   setTabIndex,
 }) => {
-  // const [tabIndex, setTabIndex] = useState(0);
-
-  /**----- HANDLE UPLOAD FILE ------ */
+  const TABS_CONTENT = ["Overview", "Timeline", "Assets", "Files", "Reviews"];
+  const navigate = useNavigate();
   const getInputFile = (e) => {
     e.preventDefault();
   };
 
+  const handleBackToProjects = () => {
+    navigate(-1);
+  };
   return (
-    <div className="w-full h-full flex flex-col">
-      <header className="h-fit">
-        <div className="flex justify-between items-center text-sm opacity-55 ">
-          <p>
-            All Projects / {brand} / {category}
-          </p>
-          <p>Last Updated: {moment(lastUpdated).format("MMM DD, YYYY")}</p>
-        </div>
-        <div className="py-4 flex justify-between items-center">
-          <h1 className="text-3xl">{projectName}</h1>
-          <div className="flex items-center gap-x-4">
-            <div className="flex">
-              {[1, 2, 3].map((ele, ind) => (
-                <Avatar size={30} border={"#000000"} ind={ind} />
-              ))}
+    <section className="flex flex-col w-full pr-2 justify-between gap-4 max-h-[calc(100vh-150px)] overflow-y-auto custom-scrollbar scrollbar-md">
+      <div className="px-2">
+        <header className="flex flex-col ">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-3 m-3 items-center">
+              <div
+                className="bg-[#1A1A1A] items-center rounded-xl text-center flex h-[45px] w-fit p-2 opacity-55 sm:h-[35px] sm:w-[35px] cursor-pointer"
+                onClick={handleBackToProjects}
+              >
+                <IoIosArrowRoundBack size={30} />
+              </div>
+              <span>{ projectId?.projectName || "Food Website"}</span>
             </div>
-            <button className="bg-gradient-to-r from-[#e1ff26]  via-[#FF8E8E] to-[#7D22FF] text-xl bg-clip-text text-transparent flex items-center gap-x-2 px-4 py-1.5 rounded-full border-2 border-[#292929]">
-              <TbUsers className="text-[#ffe67b]" /> Share
-            </button>
+            <span className="opacity-55">
+              Last Updated : {projectId?.lastdate || "Sep 2, 2024"}
+            </span>
           </div>
-        </div>
-      </header>
-      <section className="w-full flex-1 flex flex-col overflow-hidden">
-        {/**---------- TABS ------------- */}
-        <div className="flex h-fit gap-x-10 pt-6 border-b-2 border-[#292929]">
+
+          <div className="flex m-3">
+            <img src={CreatorImg} alt="creator-img" />
+            <div className="flex flex-col justify-start">
+              <div className="flex m-2">
+                <h1 className="mx-3">{creatorName}</h1>
+              </div>
+              <div className="flex gap-3 m-3">
+                <div
+                  className={`items-center rounded-xl text-center flex h-[25px] w-fit p-3 text-[11px] font-normal text-nowrap ${
+                    category === "Pro Designer"
+                      ? "bg-gradient-to-r from-[#FFE67B] via-[#FF8E8E] to-[#7D22FF] bg-clip-text text-transparent opacity-100 border-2 border-slate-800"
+                      : "opacity-55 bg-[#1a1a1a]"
+                  }`}
+                >
+                  {category}
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="flex h-fit gap-x-10 pt-3 border-b-2 border-[#292929] ">
           {TABS_CONTENT.map((ele, ind) => (
             <p
               className={`font-thin text-lg cursor-pointer w-20 text-center  pb-2 mb-[1.5px] ${
                 tabIndex === ind
-                  ? "text-[#e1ff26] opacity-100 border-b-2 border-[#e1ff26]"
+                  ? "text-[#fcfcd8] opacity-100 shadow-[0_2px_0px_rgba(0,0,0,0.1)] shadow-white border-[#fcfcd8]"
                   : "opacity-55"
               }`}
+              key={ind}
               onClick={() => setTabIndex(ind)}
             >
               {ele}
             </p>
           ))}
         </div>
-        {/**----------- TABS CONTENT ----------- */}
-        <div className="pt-4 w-full flex-1 overflow-hidden">
+        <div className="pt-4 w-full flex-1">
           {/**----------------------------- OVERVIEW SECTION -------------------------------------- */}
           {tabIndex === 0 && (
             <div className=" w-full h-full pr-2 overflow-y-auto custom-scrollbar scrollbar-sm">
@@ -123,7 +134,7 @@ const ProjectDetailsCard = ({
                 </div>
                 <div className="flex items-center gap-x-5">
                   <p>Status: </p>
-                  {/* <p
+                  <p
                     className={`text-[11px] px-3 py-1 rounded-full  ${
                       projectStatus === "Completed"
                         ? "text-white bg-green-600"
@@ -131,7 +142,7 @@ const ProjectDetailsCard = ({
                     }`}
                   >
                     {projectStatus}
-                  </p> */}
+                  </p>
                   <Chip
                     text={projectStatus}
                     bgCol={
@@ -170,7 +181,6 @@ const ProjectDetailsCard = ({
                 </p>
                 <input
                   type="file"
-                  //   className="hidden"
                   hidden
                   id="fileInput"
                   onChange={getInputFile}
@@ -211,22 +221,12 @@ const ProjectDetailsCard = ({
 
           {/**---------------------------- REVIEWS SECTION ------------------------------------- */}
           {tabIndex === 3 && (
-            <div className="w-full h-full overflow-x-hidden overflow-y-auto custom-scrollbar scrollbar-sm  pr-2 flex flex-col gap-y-4">
-              {reviews?.map((ele) => (
-                <DraftDetailsCard
-                  key={ele}
-                  draftName={`Draft ${ele}`}
-                  projectName={"Illustration Design"}
-                  projectId={projectId}
-                  draftId={ele}
-                />
-              ))}
-            </div>
+            <div className="w-full h-full overflow-x-hidden overflow-y-auto custom-scrollbar scrollbar-sm  pr-2 flex flex-col gap-y-4"></div>
           )}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default ProjectDetailsCard;
+export default ProjectReportCard;

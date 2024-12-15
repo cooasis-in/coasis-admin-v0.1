@@ -1,16 +1,18 @@
 import ProfileImg1 from "../assets/images/recent_activity_img1.svg";
 import ProfileImg2 from "../assets/images/recent_activity_img2.svg";
 import DesignerImg from "../assets/images/image 54.svg";
+import CreatorImg from "../assets/images/Mask group.svg";
 import { APP_URL } from "./url";
 import { FiHome, FiUsers } from "react-icons/fi";
 import { BsLightningCharge } from "react-icons/bs";
-import { PiEnvelope, PiEnvelopeLight } from "react-icons/pi";
+import { PiEnvelope } from "react-icons/pi";
 import {
   IoCalendarClearOutline,
   IoColorPaletteOutline,
   IoEarthOutline,
   IoLocationOutline,
 } from "react-icons/io5";
+
 import { MdOutlinePhone } from "react-icons/md";
 import { RiLetterSpacing2 } from "react-icons/ri";
 
@@ -731,6 +733,7 @@ export const creatorCardData = [
   {
     id: 1,
     name: "Emily Jameson",
+    creatorImage: CreatorImg,
     creatorCategory: "Beginner Creator",
     status: "Not Started",
     contactInformation: [
@@ -760,19 +763,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -800,6 +806,7 @@ export const creatorCardData = [
   {
     id: 2,
     name: "Liam Smith",
+    creatorImg: CreatorImg,
     creatorCategory: "Experienced",
     status: "In Progress",
     contactInformation: [
@@ -829,19 +836,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -869,6 +879,7 @@ export const creatorCardData = [
   {
     id: 3,
     name: "Sofia Garcia",
+    creatorImg: CreatorImg,
     creatorCategory: "Pro Designer",
     status: "First Draft",
     contactInformation: [
@@ -898,19 +909,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -938,6 +952,7 @@ export const creatorCardData = [
   {
     id: 4,
     name: "Amanda Lee",
+    creatorImg: CreatorImg,
     creatorCategory: "Aspiring Creator",
     status: "Revision",
     contactInformation: [
@@ -967,19 +982,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -1007,6 +1025,7 @@ export const creatorCardData = [
   {
     id: 5,
     name: "Michael Park",
+    creatorImg: CreatorImg,
     creatorCategory: "Experienced",
     status: "Final Draft",
     contactInformation: [
@@ -1036,19 +1055,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -1076,6 +1098,7 @@ export const creatorCardData = [
   {
     id: 6,
     name: "Olivia Rodriguez",
+    creatorImg: CreatorImg,
     creatorCategory: "Pro Designer",
     status: "Completed",
     contactInformation: [
@@ -1105,19 +1128,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -1145,6 +1171,7 @@ export const creatorCardData = [
   {
     id: 7,
     name: "John Smith",
+    creatorImg: CreatorImg,
     creatorCategory: "Experienced",
     status: "In Progress",
     contactInformation: [
@@ -1174,19 +1201,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
@@ -1214,6 +1244,7 @@ export const creatorCardData = [
   {
     id: 8,
     name: "Shaffi jons ",
+    creatorImg: CreatorImg,
     creatorCategory: "Pro Designer",
     status: "First Draft",
     contactInformation: [
@@ -1243,19 +1274,22 @@ export const creatorCardData = [
       {
         id: 1,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 2,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
       {
         id: 3,
         projectName: "Food Website",
-        projectDescription:"Made stunning food website design called foodWorld design",
+        projectDescription:
+          "Made stunning food website design called foodWorld design",
         projectDeadline: "Fab 2, 2025",
       },
     ],
