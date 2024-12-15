@@ -9,7 +9,7 @@ import { MdOutlineCalendarToday } from "react-icons/md";
 import { TbAlertOctagon } from "react-icons/tb";
 import ReactPlayer from "react-player";
 import moment from "moment";
-import SessionVideo from "../../assets/videos/review.webm";
+import SessionVideo from "../../assets/videos/review.webm";//video format change
 import { useNavigate } from "react-router-dom";
 import VisualDesign from "../../assets/images/visual-design.svg";
 import UIDesign from "../../assets/images/UX&UI-design.svg";
