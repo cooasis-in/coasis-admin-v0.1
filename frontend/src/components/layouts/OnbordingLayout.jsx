@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoCheckmark } from "react-icons/io5";
 
 // Images
-import cohyveLogo from "../../assets/images/cohyve_logo.svg"
+import cohyveLogo from "../../assets/images/CohyveLogo_admin.svg"
 
 // background video
 import oneBgVideo from "../../assets/videos/01_bg.webm";
@@ -82,27 +82,6 @@ function OnbordingLayout({ children }) {
             <nav className="relative p-2">
               <img src={cohyveLogo} className="w-[10rem]" alt="Cooasis Logo" />
             </nav>
-
-            {/* FOOTER */}
-            <div className="pr-[5rem] mb-[1rem]">
-              <div className="pr-[17rem]">
-                <h1 className="w-[400px] f-HelveticaNeueRoman leading-[2.7rem] text-[#FFF5D9] text-[40px] mb-[2rem]">
-                  Join the nex-gen design ecosyatem
-                </h1>
-                <div className="text-[#FFF5D9] flex flex-wrap gap-3">
-                  {benefits.map((benefit, index) => (
-                    <div className="flex items-center" key={index}>
-                      <p className="p-[2px] bg-gray-700 rounded-full mr-[6px]">
-                        <IoCheckmark className="text-[#E1FF26] text-[14px]" />
-                      </p>
-                      <span className="text-[13px] f-HelveticaNeueRoman">
-                        {benefit}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

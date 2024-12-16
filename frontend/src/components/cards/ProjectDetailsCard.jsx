@@ -32,7 +32,6 @@ const ProjectDetailsCard = ({
   /**----- HANDLE UPLOAD FILE ------ */
   const getInputFile = (e) => {
     e.preventDefault();
-    console.log("Files", e.target.files[0]);
   };
 
   return (
