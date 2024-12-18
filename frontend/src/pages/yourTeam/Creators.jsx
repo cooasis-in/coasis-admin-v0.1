@@ -4,11 +4,12 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { creatorCardData } from "../../config"; // Assuming this is your data file
 import CreatorDetailCard from "../../components/cards/CreatorDetailCard";
-import YourTeamBandwidth from "../../assets/images/your-team-bandwidth.svg";
+// import YourTeamBandwidth from "../../assets/images/your-team-bandwidth.svg";
 import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import ViewProjectCard from "../../components/cards/viewProjectCard";
 import ProjectReportCard from "../../components/cards/ProjectReportCard";
 import SessionCard from "../../components/cards/SessionCard";
+import CreatorPieChart from "../../components/cards/CreatorPieChart";
 // Updated import
 
 const creatorCategoryOptions = [
@@ -52,14 +53,8 @@ const Creators = () => {
         {/* Left section: Creator Cards */}
         <section className="basis-[58%] h-full flex flex-col p-4">
           <h5 className="pb-4 px-4">Your Team Bandwidth</h5>
-          <div className="h-fit bg-[#141414] rounded-3xl flex justify-center items-center py-4">
-            <img
-              src={YourTeamBandwidth}
-              alt="bandwidth-img"
-              width={650}
-              height={600}
-            />
-          </div>
+          <CreatorPieChart />
+          
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Filter by category */}
             <header className="flex h-fit justify-between items-center px-1 py-4 rounded-[26px]">
