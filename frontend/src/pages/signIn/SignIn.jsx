@@ -80,7 +80,7 @@ function SignIn() {
   };
 
   const handleSignUp = () => {
-    navigate("/");
+    navigate("/signup");
   };
 
   useEffect(() => {

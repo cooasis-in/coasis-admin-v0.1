@@ -12,14 +12,14 @@ import ClosedProjects from "./pages/Projects/ClosedProjects";
 import Creators from "./pages/yourTeam/Creators";
 import Brands from "./pages/yourTeam/Brands";
 import Chat from "./pages/Index/Chat";
-import Signup from "./pages/signUp/SignUp";
+import SignUp from "./pages/signUp/SignUp";
 import Signin from "./pages/signIn/SignIn";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path={APP_URL.SIGNUP} element={<Signup />} />
+        <Route path={APP_URL.SIGNUP} element={<SignUp />} />
         <Route path={APP_URL.SIGNIN} element={<Signin />} />
         <Route path={APP_URL.HOME} element={<Home />} />
         <Route path={APP_URL.PROJECTS} element={<OpenProjects />} />

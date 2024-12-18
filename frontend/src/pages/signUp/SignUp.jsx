@@ -1,67 +1,26 @@
-import { useContext, useState } from "react";
-import ReactCountryFlag from "react-country-flag";
-import { getCode } from "country-list";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { auth, sendSignInLinkToEmail } from "../../firebase.config";
 
 // image
 import circleLogo from "../../assets/images/circleLogo.svg";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setEmail,
-  // setEmailOpt,
-  setComName,
-  setComFlag,
-} from "../../features/userSlice";
+// layout
 import OnbordingLayout from "../../components/layouts/OnbordingLayout";
 
 function SignUp() {
-  const dispatch = useDispatch();
-
-  // Use useSelector to access global state from Redux
-  const email = useSelector((state) => state.user.email);
-  const comName = useSelector((state) => state.user.comName);
-  const comFlag = useSelector((state) => state.user.comFlag);
-
-  // Local state variables for form input
-  const [companyName, setCompanyName] = useState(comName);
-  const [companyEmail, setCompanyEmail] = useState(email);
-  const [country, setCountry] = useState(comFlag);
-  const [countryCode, setCountryCode] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [linkSent, setLinkSent] = useState(false);
 
-  // const actionCodeSettings = {
-  //   url: `https://release.d333l9e2sjygsd.amplifyapp.com/reset-password?email=${encodeURIComponent(
-  //     companyEmail
-  //   )}`, // Your app URL to handle email verification
-  //   handleCodeInApp: true,
-  // };
-
+  const position = ["Super Admin", "Manager"];
   const navigate = useNavigate();
-  // Generate 6-digit OTP
-  // const generateOTP = () => {
-  //   return Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit OTP
-  // };
-
-  // Handler
-  const handleInputChange = (event) => {
-    const countryName = event.target.value;
-    setCountry(countryName);
-
-    // Get country code from country name
-    const code = getCode(countryName);
-    setCountryCode(code);
-  };
 
   const handleSignIn = () => {
     navigate("/signin");
   };
 
   const validateEmail = (email) => {
-    // Dynamically create the regex based on companyName
     const companyDomain = companyName.replace(/\s+/g, "").toLowerCase();
     const emailRegex = new RegExp(
       `^[\\w-\\.]+@${companyDomain}\\.(com|in)$`,
@@ -85,39 +44,17 @@ function SignUp() {
         .toLowerCase()}.in`;
     }
 
-    if (!country.trim()) newErrors.country = "Country is required.";
-
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
       try {
-        try {
-          if (!companyEmail) {
-            setErrors({ companyEmail: "Email is required." });
-            return;
-          }
-          // const response = await sendSignInLinkToEmail(
-          //   auth,
-          //   companyEmail,
-          //   actionCodeSettings
-          // );
-          // console.log("Response from Firebase:", response);
-          setLinkSent(true);
-        } catch (error) {
-          console.error("Error sending OTP:", error.message); // This will give more details
-        }
-        window.localStorage.setItem("emailForSignIn", companyEmail); // Store email for verification later
-        console.log("OTP sent to:", companyEmail);
-
-        // Dispatch to Redux
-        dispatch(setComName(companyName));
-        dispatch(setComFlag(country));
-        dispatch(setEmail(companyEmail));
+        setLinkSent(true);
+        window.localStorage.setItem("emailForSignIn", companyEmail);
+        console.log("Verification link sent to:", companyEmail);
       } catch (error) {
         console.error("Error sending OTP:", error);
         setErrors({ email: error.message });
@@ -133,8 +70,8 @@ function SignUp() {
           src={circleLogo}
           alt="Business Logo"
         />
-        <p className="text-[25px]  text-[#FFF5D9] my-[1.5rem]">
-          Signup as business
+        <p className="text-[25px] text-[#FFF5D9] my-[1.5rem]">
+          Create Account
         </p>
 
         <form className="flex flex-col gap-[0.7rem]" onSubmit={handleSubmit}>
@@ -144,10 +81,10 @@ function SignUp() {
             name="company_name"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            className={`bg-[#000000D4] w-[300px] text-[14px] placeholder-gray-400 text-gray-400 border-[1px] rounded-full py-[0.8rem] px-[2rem] ${
+            className={`bg-[#000000D4] w-[300px] text-[14px] placeholder-gray-400 text-gray-400 border-[1px] rounded-2xl py-[0.8rem] px-[2rem] ${
               errors.companyName ? "border-red-500" : "border-gray-700"
             }`}
-            placeholder="Company name*"
+            placeholder="Company Name"
             disabled={linkSent}
           />
 
@@ -157,31 +94,21 @@ function SignUp() {
             name="company_email"
             value={companyEmail}
             onChange={(e) => setCompanyEmail(e.target.value)}
-            className={`bg-[#000000D4] w-[300px] text-[14px] placeholder-gray-400 text-gray-400 border-[1px] rounded-full py-[0.8rem] px-[2rem] ${
+            className={`bg-[#000000D4] w-[300px] text-[14px] placeholder-gray-400 text-gray-400 border-[1px] rounded-2xl py-[0.8rem] px-[2rem] ${
               errors.companyEmail ? "border-red-500" : "border-gray-700"
             }`}
-            placeholder="Company email*"
+            placeholder="Company Email*"
             disabled={linkSent}
           />
 
           <div className="relative">
-            <input
-              type="text"
-              value={country}
-              onChange={handleInputChange}
-              placeholder="Country name*"
-              className={`bg-[#000000D4] w-[300px] text-[14px] placeholder-gray-400 text-gray-400 border-[1px] rounded-full py-[0.8rem] px-[2rem] ${
-                errors.country ? "border-red-500" : "border-gray-700"
-              }`}
-              disabled={linkSent}
-            />
-            {countryCode && (
-              <ReactCountryFlag
-                countryCode={countryCode}
-                svg
-                className="absolute top-[1.2rem] right-[1.5rem]"
-              />
-            )}
+            <select className="bg-[#262626] mt-[2rem] w-[300px] text-[14px] text-[#FCFCD8] rounded-2xl py-[0.8rem] px-[2rem]">
+              {position.map((ele) => (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Button */}

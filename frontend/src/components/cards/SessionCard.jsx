@@ -9,24 +9,29 @@ import { MdOutlineCalendarToday } from "react-icons/md";
 import { TbAlertOctagon } from "react-icons/tb";
 import ReactPlayer from "react-player";
 import moment from "moment";
-import SessionVideo from "../../assets/videos/review.webm";//video format change
+import SessionVideo from "../../assets/videos/review.webm"; // video format change
 import { useNavigate } from "react-router-dom";
 import VisualDesign from "../../assets/images/visual-design.svg";
 import UIDesign from "../../assets/images/UX&UI-design.svg";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import dayjs from "dayjs";
+import { darkTheme } from "../../utils/custom.style";
 
 const SessionCard = ({ creatorName, ongoingProject }) => {
-  const [startDate, setStartDate] = useState(moment());
+  const [startDate, setStartDate] = useState(dayjs());  // Use dayjs to initialize the date
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
+  const [value, setValue] = useState(dayjs());  // Use dayjs for the selected date
   const navigate = useNavigate();
 
   const handlePrevious = () => {
-    setStartDate(startDate.clone().subtract(1, "days"));
+    setStartDate(startDate.subtract(1, "days"));
   };
 
   const handleNext = () => {
-    setStartDate(startDate.clone().add(1, "days"));
+    setStartDate(startDate.add(1, "days"));
   };
 
   const handleProgress = (state) => {
@@ -36,12 +41,24 @@ const SessionCard = ({ creatorName, ongoingProject }) => {
   const handleDuration = (duration) => {
     setDuration(duration);
   };
+
   const handleBackToProjects = () => {
     navigate(-1);
   };
 
   // Get first name from creatorName
   const firstName = creatorName.split(" ")[0];
+  const isToday = value && value.isSame(dayjs(), "day");  // Check if the selected date is today
+
+  const onChange = (date) => {
+    setValue(date); // set the selected date
+  };
+
+  const handleDate = (newValue) => {
+    setValue(newValue);  // set the selected date
+    setStartDate(newValue); // Update the startDate when the date is changed
+  };
+
 
   const progressPercentage = (currentTime / duration) * 100;
 
@@ -62,11 +79,24 @@ const SessionCard = ({ creatorName, ongoingProject }) => {
         </div>
       </header>
 
-      <div className="bg-[#1A1A1A] items-center rounded-xl text-center flex w-fit h-[45px] p-3 text-[16px] font-normal opacity-55 gap-2 mx-3">
-        <MdOutlineCalendarToday size={20} />
-        <span className="py-2">Today</span>
-      </div>
+      <ThemeProvider theme={darkTheme}>
+        <div className="items-center rounded-xl text-center flex w-fit h-[45px] p-3 text-[16px] font-normal opacity-55 gap-2 mx-3 cursor-pointer">
+          <MdOutlineCalendarToday size={20} />
+          <span className="py-2">
+            {isToday ? "Today" : value.format("MMM DD, YYYY")}  
+          </span>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <StaticDatePicker
+              displayStaticWrapperAs="desktop"
+              openTo="day"
+              value={value}  
+              onChange={handleDate}
+            />
+          </LocalizationProvider>
+        </div>
+      </ThemeProvider>
 
+      {/* Date navigation buttons */}
       <section>
         <div className="w-full h-fit opacity-55 flex gap-x-2 items-center font-thin">
           <IoMdArrowBack
@@ -80,7 +110,7 @@ const SessionCard = ({ creatorName, ongoingProject }) => {
                 key={ele}
                 className="text-center bg-[#1A1A1A] rounded-xl text-wrap px-3 m-2"
               >
-                {startDate.clone().add(ele, "days").format("MMM DD")}
+                {startDate.add(ele, "days").format("MMM DD")}
               </p>
             ))}
           </div>
